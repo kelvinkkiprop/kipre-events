@@ -24,6 +24,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             EventCategorySeeder::class,
+            EventSeeder::class,
+            EventPackageSeeder::class,
+            CountrySeeder::class,
+            TitleSeeder::class,
+            PositionSeeder::class,
         ]);
 
 

@@ -20,20 +20,10 @@ class UserSeeder extends Seeder
     {
         // Default
         $items = [
-            ['id'=>Str::uuid(),'first_name'=>'System','last_name'=>'Admin','username'=>'systemadmin','email'=>'admin@anzaacademy.com','country_id'=>91,'phone'=>'794267685',
-            'password'=>Hash::make('Secret@123'),'role_id'=>1,'status_id'=>2,'email_verified_at'=>date('Y-m-d H:i:s'),'remember_token'=>Str::random(50),'created_at'=>date('Y-m-d H:i:s')],
-            ['id'=>Str::uuid(),'first_name'=>'Learner','last_name'=>'Anza','username'=>'learneranza','email'=>'learner@anzaacademy.com','country_id'=>null,'phone'=> null,
-            'password'=>Hash::make('Secret@123'),'role_id'=>2,'status_id'=>2,'email_verified_at'=>date('Y-m-d H:i:s'),'remember_token'=>Str::random(50),'created_at'=>date('Y-m-d H:i:s')],
-            ['id'=>Str::uuid(),'first_name'=>'Instructor','last_name'=>'Anza','username'=>'instructoranza','email'=>'instructor@anzaacademy.com','country_id'=>null,'phone'=>null,
-            'password'=>Hash::make('Secret@123'),'role_id'=>3,'status_id'=>2,'email_verified_at'=>date('Y-m-d H:i:s'),'remember_token'=>Str::random(50),'created_at'=>date('Y-m-d H:i:s')],
-            ['id'=>Str::uuid(),'first_name'=>'Parent','last_name'=>'Anza','username'=>'parentanza','email'=>'parent@anzaacademy.com','country_id'=>null,'phone'=>null,
-            'password'=>Hash::make('Secret@123'),'role_id'=>4,'status_id'=>2,'email_verified_at'=>date('Y-m-d H:i:s'),'remember_token'=>Str::random(50),'created_at'=>date('Y-m-d H:i:s')],
+            ['id'=>Str::uuid(),'first_name'=>'System','last_name'=>'Admin','email'=>'admin1@kipre.go.ke', 'password'=>Hash::make('Test@123'),'role_id'=>1,'status_id'=>2,'email_verified_at'=>now(),'remember_token'=>Str::random(50),'created_at'=>now()],
+            ['id'=>Str::uuid(),'first_name'=>'System','last_name'=>'Applicant','email'=>'applicant1@kipre.go.ke', 'password'=>Hash::make('Test@123'),'role_id'=>1,'status_id'=>2,'email_verified_at'=>now(),'remember_token'=>Str::random(50),'created_at'=>now()],
         ];
-
         User::insert($items);
-
-        // $sql = File::get(database_path('seeders/userSeeder.sql'));
-        // DB::unprepared($sql);
     }
 }
 

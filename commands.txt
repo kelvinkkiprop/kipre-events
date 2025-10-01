@@ -29,7 +29,7 @@ php artisan make:seeder UserSeeder
 php artisan make:seeder EventSeeder
 php artisan make:seeder EventCategorySeeder
 php artisan make:seeder RoleSeeder
-php artisan make:seeder GenderSeeder
+php artisan make:seeder EventPackageSeeder
 php artisan make:seeder GenderSeeder
 php artisan make:seeder GenderSeeder
 php artisan make:seeder AgeBracketSeeder
@@ -53,14 +53,15 @@ php artisan make:controller API/v1/MeetingController -r
 php artisan make:controller API/v1/AttendeeController -r
 
 5.Models
-php artisan make:model Main/Venue -m
+php artisan make:model Main/Event -m
 php artisan make:model Main/Meeting -m
 php artisan make:model Main/EventCategory -m
+php artisan make:model Main/EventPackage -m
+php artisan make:model Main/EventRegistration -m
 php artisan make:model Settings/Role -m
-php artisan make:model Others/Gender -m
-php artisan make:model Others/AgeBracket -m
-php artisan make:model Others/Disability -m
-php artisan make:model Others/RegisteredMember -m
+php artisan make:model Others/Title -m
+php artisan make:model Others/Country -m
+php artisan make:model Others/Position -m
 php artisan make:model Main/Activity -m
 php artisan make:model Main/ActivityAttendee -m
 

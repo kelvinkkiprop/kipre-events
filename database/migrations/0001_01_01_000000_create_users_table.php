@@ -15,14 +15,23 @@ return new class extends Migration
             // $table->id();
             $table->uuid('id')->primary();
             $table->string('first_name')->nullable();
+            $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username')->nullable();
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('role_id')->default(2);
             $table->unsignedBigInteger('status_id')->nullable();
             $table->rememberToken();
+
+            $table->unsignedBigInteger('title_id')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('physical_address')->nullable();
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->unsignedBigInteger('position_id')->nullable();
+
             $table->timestamps();
         });
 

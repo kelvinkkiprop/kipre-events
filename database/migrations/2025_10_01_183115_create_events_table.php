@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_categories', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             // $table->id();
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('alias')->nullable();
+            $table->string('title');
+            $table->uuid('category_id')->nullable();
+            $table->uuid('venue_id')->nullable();
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
+            $table->longText('description')->nullable();
+            $table->integer('status_id')->default(1);
             $table->timestamps();
         });
     }
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('event_categories');
+        Schema::dropIfExists('events');
     }
 };
