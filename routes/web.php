@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Main\DashboardController;
 use App\Http\Controllers\Main\UserController;
 use App\Http\Controllers\Main\ContactController;
+use App\Http\Controllers\Main\EventBookingController;
 //Settings
 use App\Http\Controllers\Settings\ProfileController;
 
@@ -29,14 +30,14 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Auth Routes
+| Auth
 |--------------------------------------------------------------------------
 */
 Auth::routes();
 
 /*
 |--------------------------------------------------------------------------
-| Home Routes
+| HomeController
 |--------------------------------------------------------------------------
 */
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -47,7 +48,7 @@ Route::post('/delete-account/{id}', [HomeController::class, 'deleteAccount'])->n
 
 /*
 |--------------------------------------------------------------------------
-| ContactUs Routes
+| ContactController
 |--------------------------------------------------------------------------
 */
 Route::get('/contact-us', [ContactController::class, 'index']);
@@ -55,22 +56,32 @@ Route::post('/contact-us', [ContactController::class, 'contactUs']);
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard Routes
+| DashboardController
 |--------------------------------------------------------------------------
 */
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
-| Profile Routes
+| ProfileController
 |--------------------------------------------------------------------------
 */
 Route::resource('profile', ProfileController::class);
 
 /*
 |--------------------------------------------------------------------------
-| Users Routes
+| UserController
 |--------------------------------------------------------------------------
 */
 Route::resource('users', UserController::class);
 Route::post('search-users', [UserController::class, 'searchItems']);
+
+
+/*
+|--------------------------------------------------------------------------
+| EventBookingController
+|--------------------------------------------------------------------------
+*/
+Route::resource('event-booking', EventBookingController::class);
+Route::post('search-event-booking', [EventBookingController::class, 'searchItems']);
+

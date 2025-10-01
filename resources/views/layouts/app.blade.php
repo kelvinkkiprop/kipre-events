@@ -44,7 +44,7 @@
                             <a class="nav-link" href="https://primateresearch.org/events/international-biotechnology-and-biomedical-workshop-and-conference-2025" target="_blank">Event Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/booking">Booking</a>
+                            <a class="nav-link" href="/event-booking">Event Booking</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact-us">Contact us</a>

@@ -26,7 +26,8 @@ php artisan route:clear
 
 3. Seeders
 php artisan make:seeder UserSeeder
-php artisan make:seeder AttendeeSeeder
+php artisan make:seeder EventSeeder
+php artisan make:seeder EventCategorySeeder
 php artisan make:seeder RoleSeeder
 php artisan make:seeder GenderSeeder
 php artisan make:seeder GenderSeeder
@@ -40,7 +41,7 @@ php artisan make:controller Main/ContactController
 php artisan make:controller Main/UserController -r
 php artisan make:controller Main/VenueController -r
 php artisan make:controller Main/MeetingController -r
-php artisan make:controller Main/AttendeeController -r
+php artisan make:controller Main/EventBookingController -r
 php artisan make:controller Main/ActivityAttendeeController -r
 php artisan make:controller Settings/ProfileController -r
 php artisan make:controller Others/SingleSignOnController
@@ -54,7 +55,7 @@ php artisan make:controller API/v1/AttendeeController -r
 5.Models
 php artisan make:model Main/Venue -m
 php artisan make:model Main/Meeting -m
-php artisan make:model Main/MeetingAttendee -m
+php artisan make:model Main/EventCategory -m
 php artisan make:model Settings/Role -m
 php artisan make:model Others/Gender -m
 php artisan make:model Others/AgeBracket -m
