@@ -209,8 +209,8 @@ $ cd /var/www/html
 -Clone a Git Repository
 
 - Give proper permissions to the project directory.
-$ sudo chgrp -R www-data /var/www/html/AttendanceRegister-EBK
-$ sudo chmod -R 775 /var/www/html/AttendanceRegister-EBK/storage
+$ sudo chgrp -R www-data /var/www/html/kipre-events
+$ sudo chmod -R 775 /var/www/html/kipre-events/storage
 
 -Install composer
 $ sudo apt-get install composer
@@ -227,13 +227,15 @@ $ sudo apt-get install php-xml
 - Then composer install
 3 . Create a configuration file for our laravel project by typing the following commands
 
-$ sudo vim /etc/apache2/sites-available/laravel_ebk_sajili_digital_attendance_register.conf
+$ sudo vim /etc/apache2/sites-available/laravel_kipre_events.conf
+$ sudo vim /etc/apache2/sites-available/laravel_kipre_events.conf
+
 <VirtualHost *:80>
         #ServerName 8.8.8.8
-        ServerName ebk-sajili.konza.go.ke
+        ServerName isc2025.kipre.go.ke
         ServerAdmin kkiprop@konza.go.ke
-        DocumentRoot /var/www/html/AttendanceRegister-EBK/public
-    <Directory /var/www/html/AttendanceRegister-EBK/public>
+        DocumentRoot /var/www/html/kipre-events/public
+    <Directory /var/www/html/kipre-events/public>
         AllowOverride All
     </Directory>
 
@@ -245,7 +247,7 @@ $ sudo vim /etc/apache2/sites-available/laravel_ebk_sajili_digital_attendance_re
 which is pre-created by apache and enable mode rewrite for this to function appropriately.
 
 $ sudo a2dissite 000-default.conf (disable the default .conf file)
-$ sudo a2ensite laravel_ebk_sajili_digital_attendance_register.conf (enables the newly created .conf file)
+$ sudo a2ensite laravel_kipre_events.conf (enables the newly created .conf file)
 $ sudo a2enmod rewrite (enables the rewrite)
 
 5. Restart Server
@@ -472,13 +474,13 @@ $ sudo apt-get install supervisor
 $ sudo vi /etc/supervisor/conf.d/laravel-ebk-sajili-worker-worker.conf
 [program:laravel-ebk-sajili-worker-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=/usr/bin/php /var/www/html/AttendanceRegister-EBK/artisan queue:work database --sleep=3 --tries=3
+command=/usr/bin/php /var/www/html/kipre-events/artisan queue:work database --sleep=3 --tries=3
 autostart=true
 autorestart=true
 user=root
 numprocs=5
 redirect_stderr=true
-stdout_logfile=/var/www/html/AttendanceRegister-EBK/storage/logs/worker.log
+stdout_logfile=/var/www/html/kipre-events/storage/logs/worker.log
 
 2. Use
 - Press ESC
@@ -835,3 +837,80 @@ $ sudo apt-get install pv
 - Then use it in the import command:
 $ pv kotda_attendance_register.sql | mysql -u admin -p kotda_sajili_digital_attendance_register
 #############################################./COPY-MySQL-DATABASE-ACROSS-UBUNTU-SERVERS##################################################
+
+
+
+#############################################NGINX##################################################
+1. Configure Nginx for Laravel
+sudo vim /etc/nginx/sites-available/laravel_kipre_events
+server {
+    listen 80;
+    server_name isc2025.kipre.go.ke;
+
+    root /var/www/html/kipre-events/public;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;  # adjust PHP version if needed
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    error_log /var/log/nginx/laravel_kipre_events_error.log;
+    access_log /var/log/nginx/laravel_kipre_events_access.log;
+}
+
+
+3. Enable the site
+sudo ln -s /etc/nginx/sites-available/laravel_kipre_events /etc/nginx/sites-enabled/
+
+4. Test config
+sudo nginx -t
+sudo systemctl reload nginx
+#############################################./NGINX##################################################
+
+
+===============================================CERTBOT===============================================
+I. INSTALL
+1.Install snapd
+$ sudo snap install core; sudo snap refresh core
+
+2.Remove certbot-auto and any Certbot OS packages
+$ sudo snap remove certbot
+$ sudo apt-get remove certbot, sudo dnf remove certbot, or sudo yum remove certbot
+
+3.Install Certbot
+$ sudo apt  install certbot
+$ sudo snap install --classic certbot
+
+4.Prepare the Certbot command
+$ sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+5. Choose how you'd like to run Certbot
+$ sudo certbot --nginx
+
+6. Test automatic renewal
+$ sudo certbot renew --dry-run
+
+7. Confirm that Certbot worked
+$ visit https://yourwebsite.com/
+
+8.Reference
+https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal
+
+
+II. UNINSTALL
+1. Clean up/delete certbot:
+$ sudo certbot certificates
+2. Will list certbot installed
+$ sudo certbot delete
+===============================================./CERTBOT===============================================

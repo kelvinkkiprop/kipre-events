@@ -1,0 +1,28 @@
+{
+  "public/images/Biomedical-Conference.jpg": {
+    "file": "assets/Biomedical-Conference-Cy5swpQr.jpg",
+    "src": "public/images/Biomedical-Conference.jpg"
+  },
+  "public/images/Conference-BG.jpeg": {
+    "file": "assets/Conference-BG-BM_w9pH-.jpeg",
+    "src": "public/images/Conference-BG.jpeg"
+  },
+  "public/images/pattern-layer.jpg": {
+    "file": "assets/pattern-layer-DFwl7Qpv.jpg",
+    "src": "public/images/pattern-layer.jpg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DeyLisJz.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-BCtSfCGq.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  }
+}
