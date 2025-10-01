@@ -1,0 +1,158 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+/*--------------------------------------COMMON------------------------------------------*/
+html {
+    scroll-behavior: smooth;
+}
+body {
+	font-family: var(--font-family-Manrope);
+	font-size:14px;
+	color:var(--text-color);
+	line-height:1.6em;
+	font-weight:400;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+}
+.btn-warning:hover {
+  background-color: #ffb400;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5); /* white glow */
+  transform: translateY(-2px);
+}
+
+/*--------------------------------------COMMON------------------------------------------*/
+
+/*-------------------------------------------------APP-------------------------------------------------*/
+#app{
+    min-height: 100vh;
+    // Default_state
+    #mainNavbar.scrolled {
+        background-color: $white !important;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        .nav-link{
+            // a{
+                color: $black !important;
+            // }
+        }
+    }
+    // When_scrolled
+    #mainNavbar {
+        background-color: #E00E7A !important;
+        background-color: rgba($pink, 0.3);
+        // box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        .nav-link{
+            // a{
+                color: $white !important;
+            // }
+        }
+    }
+    #hero-section{
+        min-height: 100vh;
+        // background-image: linear-gradient(rgba(0, 122, 55, 0.6), rgba(0, 122, 55, 0.6)), url(/images/konza_complex_design.png);
+        background-image: linear-gradient(rgba(224, 14, 122, 0.8), rgba(14, 0, 88, 0.8)), url('/public/images/Conference-BG.jpeg');
+        background-size: cover;
+        background-position: center;
+        color: $white;
+        // position: relative;
+        // overflow: hidden;
+        // padding-top: 300px;
+        // padding-bottom: 200px;
+        // background-size: cover;
+        // background-position: center center;
+
+        .time-circle {
+            width: 142px;
+            height: 142px;
+            border-radius: 50%;
+            border: 6px solid; /* border gets Bootstrap color class */
+            background: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .time-circle:hover {
+            transform: scale(1.08);
+        }
+
+        .time-circle small {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 4px;
+            // color: #555;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+    }
+    #highlight-section{
+        background-image: url('/public/images/pattern-layer.jpg');
+    }
+    #event-schedule-section{
+        // .row{
+            // background-image: url('/public/images/shape-1.png');
+        // }
+        // .col-md-3{
+        // }
+        // .col-md-6{
+        //     background-image: url('/public/images/circle-icon-two.png');
+        // }
+        .nav-tabs .nav-link {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs .nav-link small {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .tab-content {
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+    }
+    .breadcrumb{
+        background-image:linear-gradient(rgba(224, 14, 122, 0.8), rgba(224, 14, 122, 0.8)),url('/public/images/Biomedical-Conference.jpg');
+        background-size: cover;
+        background-position: center;
+        // min-height: 30vh;
+    }
+}
+/*-------------------------------------------------./APP-------------------------------------------------*/
+
+/*-------------------------------------------------FOOTER-------------------------------------------------*/
+#footer
+{
+    background-color: $darkBlue !important;
+    background: $darkBlue !important;
+    color: $white !important;
+    a{
+        // color: $white;
+    }
+    a:hover{
+        // color: $gold;
+    }
+}
+/*-------------------------------------------------./FOOTER-------------------------------------------------*/
+
+
+
+

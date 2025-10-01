@@ -1,0 +1,837 @@
+#####################################################################################################
+A. LAREVEL
+1. Create Project
+composer create-project laravel/laravel kipre-events "12.*"
+
+2. Auth
+composer require laravel/ui
+php artisan ui bootstrap
+php artisan ui bootstrap --auth
+npm install && run dev
+
+3. Queue
+A. Create
+php artisan queue:table
+B.Run
+php artisan queue:listen
+php artisan queue:work
+
+
+2.Commands
+php artisan config:clear
+php artisan cache:clear
+composer dump-autoload
+php artisan view:clear
+php artisan route:clear
+
+3. Seeders
+php artisan make:seeder UserSeeder
+php artisan make:seeder AttendeeSeeder
+php artisan make:seeder RoleSeeder
+php artisan make:seeder GenderSeeder
+php artisan make:seeder GenderSeeder
+php artisan make:seeder GenderSeeder
+php artisan make:seeder AgeBracketSeeder
+php artisan make:seeder DisabilitySeeder
+
+4. Controllers
+php artisan make:controller Main/DashboardController
+php artisan make:controller Main/ContactController
+php artisan make:controller Main/UserController -r
+php artisan make:controller Main/VenueController -r
+php artisan make:controller Main/MeetingController -r
+php artisan make:controller Main/AttendeeController -r
+php artisan make:controller Main/ActivityAttendeeController -r
+php artisan make:controller Settings/ProfileController -r
+php artisan make:controller Others/SingleSignOnController
+php artisan make:controller Others/QRCodeCheckinController
+php artisan make:controller API/v1/InsightController
+php artisan make:controller API/v1/AuthController
+php artisan make:controller API/v1/VenueController -r
+php artisan make:controller API/v1/MeetingController -r
+php artisan make:controller API/v1/AttendeeController -r
+
+5.Models
+php artisan make:model Main/Venue -m
+php artisan make:model Main/Meeting -m
+php artisan make:model Main/MeetingAttendee -m
+php artisan make:model Settings/Role -m
+php artisan make:model Others/Gender -m
+php artisan make:model Others/AgeBracket -m
+php artisan make:model Others/Disability -m
+php artisan make:model Others/RegisteredMember -m
+php artisan make:model Main/Activity -m
+php artisan make:model Main/ActivityAttendee -m
+
+
+6. Middleware
+i. Create
+php artisan make:middleware AdminsOnly
+ii. Assigning Middleware To Routes: Within App\Http\Kernel class
+protected $routeMiddleware = [
+    //Add
+    'adminonly' => \App\Http\Middleware\AdminsOnly::class,
+];
+
+
+7. Mails
+php artisan make:mail SendEmail
+php artisan queue:listen
+php artisan queue:work
+
+8. Others
+i. Change Timezone
+-Add this to .env:
+TIME_ZONE = 'put_your/timezone_here' e,g, 'Africa/Nairobi'
+
+- And in /config/app.php change:
+'timezone' => 'UTC',
+to:
+'timezone' => env('TIME_ZONE', 'UTC'),
+
+9. Migrate Jobs Table
+php artisan migrate --path=/database/migrations/2019_08_19_000000_create_failed_jobs_table.php
+
+#####################################################################################################
+
+
+
+#####################################################################################################
+B. FONT AWESOME
+1. Installation
+npm install --save @fortawesome/fontawesome-free --save
+
+2. Usage
+-Add below line to app.scss
+$fa-font-path:"../webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+#####################################################################################################
+
+
+
+#####################################################################################################
+C. ADMIN-LTE
+1. Installation
+npm install admin-lte@^3.1 --save
+
+2. Usage
+-Add below line to app.scss
+@import '~admin-lte/dist/css/adminlte.css';
+-Add to bootstrap inside resource/js
+require('admin-lte');
+#####################################################################################################
+
+
+
+#####################################################################################################
+D. INSTALL XAMPP IN UBUNTU
+1.Check Linux Version
+lsb_release -a
+
+2.Download Ubuntu for Linux from
+-https://www.apachefriends.org/download_success.html
+
+2. Move file to remote Linux Server
+scp C:/Users/kkiprop/Downloads/xampp-linux-x64-8.1.10-0-installer.run root@41.76.175.81:~/
+
+3. Make the installation package executable
+$ chmod 755 xampp-linux-x64-8.1.10-0-installer.run
+
+4. Launch the Setup Wizard
+sudo ./xampp-linux-x64-8.1.10-0-installer.run
+
+5. Launch XAMPP through the Terminal
+$ sudo /opt/lampp/lampp start
+
+6. Fix ERROR on Browser - Access to the requested directory is only available from the local network.
+This setting can be configured in the file "httpd-xampp.conf".
+sudo nano /opt/lampp/etc/extra/httpd-xampp.conf
+
+-Change change security settings to:
+#LoadModule perl_module        modules/mod_perl.so
+
+<Directory "/opt/lampp/phpmyadmin">
+    AllowOverride AuthConfig Limit
+    Order allow,deny
+    Allow from all
+    Require all granted
+    ErrorDocument 403 /error/XAMPP_FORBIDDEN.html.var
+</Directory
+-Restart
+/opt/lampp/xampp restart
+
+7. Unistall
+$ cd /opt/lampp
+$ sudo ./uninstall
+
+8.Reference
+https://vitux.com/ubuntu-xampp/
+#####################################################################################################
+
+
+#####################################################################################################
+E. DEPLOY LARAVEL PROJECT TO LINUX SERVER
+1. Install Apache on Ubuntu
+-Open a terminal and run this command:
+$ sudo apt-get update
+$ sudo apt-get install apache2
+- Upgrade for latest software
+$ sudo apt-get upgrade
+
+2.Incase you Want to Remove Apache
+- First stop the apache2 service if it is running with:
+$ sudo service apache2 stop
+- Now remove and cleanup all the apache2 packages with:
+$ sudo apt-get purge apache2 apache2-utils apache2-bin apache2.2-common
+    OR
+$sudo apt-get purge apache2 apache2-utils apache2.2-bin apache2-common
+- Finally, run
+$ sudo apt-get autoremove
+- Two tests to confirm apache has been removed:
+$ which apache2 (should return a blank line)
+$ sudo service apache2 start (should return apache2: unrecognized service)
+
+-Verify Apache Installation
+Open a web browser and type in the address bar http://server_ip_address
+
+-Restart if not visible
+$ sudo systemctl stop apache2
+$ sudo systemctl start apache2
+$ sudo systemctl restart apache2
+$ sudo systemctl reload apache2
+
+2. Install Laravel
+-Go to
+$ cd /var/www/html
+-Clone a Git Repository
+
+- Give proper permissions to the project directory.
+$ sudo chgrp -R www-data /var/www/html/AttendanceRegister-EBK
+$ sudo chmod -R 775 /var/www/html/AttendanceRegister-EBK/storage
+
+-Install composer
+$ sudo apt-get install composer
+
+-Update ENV File and Generate An Encryption Key
+$ cp .env.example .env
+or
+$ touch .env
+$ composer update
+$ php artisan key:generate
+
+-  ERROR: the requested PHP extension dom is missing from your system.
+$ sudo apt-get install php-xml
+- Then composer install
+3 . Create a configuration file for our laravel project by typing the following commands
+
+$ sudo vim /etc/apache2/sites-available/laravel_ebk_sajili_digital_attendance_register.conf
+<VirtualHost *:80>
+        #ServerName 8.8.8.8
+        ServerName ebk-sajili.konza.go.ke
+        ServerAdmin kkiprop@konza.go.ke
+        DocumentRoot /var/www/html/AttendanceRegister-EBK/public
+    <Directory /var/www/html/AttendanceRegister-EBK/public>
+        AllowOverride All
+    </Directory>
+
+    #ErrorLog ${APACHE_LOG_DIR}/error.log
+    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+4. Enable the newly created .conf file and disable the default .conf
+which is pre-created by apache and enable mode rewrite for this to function appropriately.
+
+$ sudo a2dissite 000-default.conf (disable the default .conf file)
+$ sudo a2ensite laravel_ebk_sajili_digital_attendance_register.conf (enables the newly created .conf file)
+$ sudo a2enmod rewrite (enables the rewrite)
+
+5. Restart Server
+$ sudo service apache2 restart
+#####################################################################################################
+
+
+
+#####################################################################################################
+F. MYSQL SERVER
+1. Install MySQL Server
+$ sudo apt-get update
+$ sudo apt-get install mysql-server
+
+2. Check MySQL Version
+$ mysql -V
+$ mysql --version
+
+3. Install the PHP-MySQL drivers:
+$ sudo apt install php-mysql
+
+3. Create MySQL Database
+$ mysql -u root -e "create database attendance_register"
+$ mysql -u root -e "create database ebk_sajili_digital_attendance_register"
+$ mysql> create database attendance_register
+
+4. Easiest way to fix SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost' error in MySQl
+-Step 1:
+ sudo mysql -u root -p OR sudo mysql -p -u root
+-then enter your sudo password if it’s asked.
+-It will also ask for mysql password. For that one it’s blank so just press Enter.
+-Step 2:
+USE mysql;
+-Step 3:
+UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+-Step 4.
+FLUSH PRIVILEGES;
+-Step 5.
+exit;
+-Step 6.
+$ service mysql restart
+
+5. List all databases in MySQL, run the following command:
+mysql -u root -p
+mysql> show databases;
+
+6. Backup Db
+$
+
+G. UNISTALL MYSQL SERVER
+1. Note: Backup Database (All mysql data will be lost)
+
+2. First make sure that MySQL service is stopped.
+$ sudo systemctl stop mysql
+
+3.Remove MySQL related all packages completely.
+$ sudo apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+
+4.Remove MySQL configuration and data
+$ sudo rm -rf /etc/mysql /var/lib/mysql
+
+5. (Optional) Remove unnecessary packages.
+$ sudo apt autoremove
+
+6. (Optional) Remove apt cache.
+$ sudo apt autoclean
+#####################################################################################################
+
+
+
+#####################################################################################################
+H. SSL in UBUNTU SERVER
+1.Install snapd
+sudo snap install core; sudo snap refresh core
+2.Remove certbot-auto and any Certbot OS packages
+sudo apt-get remove certbot, sudo dnf remove certbot, or sudo yum remove certbot
+3.Install Certbot
+sudo snap install --classic certbot
+4.Prepare the Certbot command
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+5. Choose how you'd like to run Certbot
+sudo certbot --apache
+OR
+sudo certbot certonly --apache
+6. Automatic reniwal
+sudo certbot renew --dry-run
+7.Reference
+https://certbot.eff.org/instructions?ws=apache&os=ubuntubionic
+#####################################################################################################
+
+
+
+#####################################################################################################
+I. MySQL
+1. Navigate to:
+/var/lib/mysql
+
+2. Login to the database server:
+$ mysql -u root -p
+Enter password: **********
+mysql>
+
+3. Select Database
+$ mysql>\ use attandance_register;
+
+4.List all databases:
+$ mysql>\ show databases
+
+5. Quite
+mysql>\ quit
+#####################################################################################################
+
+
+
+#####################################################################################################
+J. DomPDF
+1.Install dompdf Package
+$ composer require barryvdh/laravel-dompdf
+
+2. Add to config/app.php
+'providers' => [
+	Barryvdh\DomPDF\ServiceProvider::class,
+],
+
+'aliases' => [
+	'PDF' => Barryvdh\DomPDF\Facade::class,
+]
+3 Add Web Route
+Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
+4.Add Controller
+use PDF;
+class PDFController extends Controller
+{
+    /**
+     * generatePDF
+     */
+    public function generatePDF()
+    {
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+
+        $pdf = PDF::loadView('myPDF', $data);
+        return $pdf->download('itsolutionstuff.pdf');
+    }
+}
+6. Create View File
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hi</title>
+</head>
+<body>
+    <h1>{{ $title }}</h1>
+    <p>{{ $date }}</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</body>
+</html>
+
+7. The PHP GD extension is required, but is not installed (Server Error)
+$ apt-get install php-gd
+$sudo service apache2 restart
+
+8. Reference
+$ https://www.itsolutionstuff.com/post/laravel-8-pdf-laravel-8-generate-pdf-file-using-dompdfexample.html
+
+9. Letter
+i. Add header and footer
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            @page{
+                margin-top: 150px;
+                margin-bottom: 150px;
+            }
+            header{
+                position: fixed;
+                left: 0px;
+                right: 0px;
+                height: 150px;
+                margin-top: -150px;
+            }
+            footer{
+                position: fixed;
+                left: 0px;
+                right: 0px;
+                height: 150px;
+                bottom: 0px;
+                margin-bottom: -150px;
+            }
+        </style>
+    </head>
+    <body>
+         <header>
+              <img src="{{public_path("images/header.jpg")}}" style="width: 100%" >
+         </header>
+         <footer>
+              <img src="{{public_path("images/footer.jpg")}}" style="width: 100%">
+         </footer>
+         <main>
+                   <!-- content here -->
+         </main>
+    </body>
+</html>
+
+ii. Reference
+https://stackoverflow.com/questions/70709193/unable-to-add-header-footer-on-every-page-of-pdf-using-dompdf
+#####################################################################################################
+
+
+#####################################################################################################
+K.SUPERVISOR
+1. Install
+- How to use supervisor to process jobs in Laravel in Linux Server
+$ sudo apt-get install supervisor
+$ sudo vi /etc/supervisor/conf.d/laravel-ebk-sajili-worker-worker.conf
+[program:laravel-ebk-sajili-worker-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/bin/php /var/www/html/AttendanceRegister-EBK/artisan queue:work database --sleep=3 --tries=3
+autostart=true
+autorestart=true
+user=root
+numprocs=5
+redirect_stderr=true
+stdout_logfile=/var/www/html/AttendanceRegister-EBK/storage/logs/worker.log
+
+2. Use
+- Press ESC
+- Then :wq
+$ sudo supervisorctl reread
+$ sudo supervisorctl update
+$ sudo supervisorctl start 'laravel-ebk-sajili-worker-worker:*'
+OR
+$ sudo supervisorctl start laravel-ebk-sajili-worker-worker.conf
+$ supervisorctl restart laravel-ebk-sajili-worker-worker:*
+
+-Check if supervisor is running
+$ ps aux | grep artisan
+
+supervisorctl commands
+sudo supervisorctl stop all
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start all
+
+Reference:
+https://laravel.com/docs/6.x/queues#supervisor-configuration
+
+3. Unistall
+- remove the package
+$ sudo apt-get remove supervisor
+- remove the package and all config
+$ sudo apt-get purge supervisor
+#####################################################################################################
+
+
+
+#####################################################################################################
+L. CKEDITOR
+1. Installation
+npm install --save @ckeditor/ckeditor5-build-classic
+2. Usage
+-Add below line to app.js
+require( '@ckeditor/ckeditor5-build-[name]' ) i.e
+require( '@ckeditor/ckeditor5-build-classic')
+
+3. Add to main JS file (same as above)
+//CkEditor
+$(function () {//on page ready
+    let editor = document.querySelector( '#editor' );
+    if(editor!==null){
+        window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
+        .create(editor)
+        .catch( error => {
+            console.error( error );
+        } );
+    }
+});
+
+4. Reference
+https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/installation.html#npm
+#####################################################################################################
+
+
+
+#####################################################################################################
+M. Generator QR Code
+1. Install simple-QRcode Package
+$ composer require simplesoftwareio/simple-qrcode
+2. Configure Simple QR Code Package
+-open config/app.php file and add service provider and aliases.
+'providers' => [
+ ….
+ SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
+ ],
+
+'aliases' => [
+ ….
+ 'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+ ],
+3. Add Routes
+Route::get('qrcode', function () {
+     return QrCode::size(300)->generate('A basic example of QR code!');
+ });
+
+ 4. Fix Error
+ -Enable the extension below in php.ini and restart apache
+ extension=gd
+- remove the library with
+$ composer remove simplesoftwareio/simple-qrcode
+and reinstall
+5. Reference
+https://www.tutsmake.com/laravel-9-generator-qr-code-tutorial-with-example/
+#####################################################################################################
+
+#####################################################################################################
+N. Generator QR Code
+1. Install
+$ npm install --save signature_pad
+
+2.
+
+5. Reference
+https://github.com/szimek/signature_pad
+#####################################################################################################
+
+
+#####################################################################################################
+O. JQuery
+1. Install
+$ npm i jquery
+
+2.import jquery in resources/js/app.js
+import jQuery from 'jquery';
+window.$ = jQuery;
+
+5. Reference
+https://larainfo.com/blogs/how-to-install-jquery-in-laravel-9
+#####################################################################################################
+
+
+
+
+#####################################################################################################
+G. SQLSTATE[HY000] [1698] Access denied for user 'root'@'localhost'
+Step 1:Log into MYSQL as root
+mysql -u root
+
+2. Grant privileges. For a new user, execute:
+ CREATE USER 'admin'@'localhost' IDENTIFIED BY 'Konza@2030';
+ GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+ FLUSH PRIVILEGES;
+
+ #####################################################################################################
+
+ #####################################################################################################
+ H. ERRORS
+ a. You need to install the libxml extension to use this back end
+ sudo apt-get install php-xml
+ sudo service apache2 restart
+ b. The PHP GD extension is required, but is not installed
+ PHP8.0: sudo apt-get install php8.0-gd
+ PHP8.1: sudo apt-get install php8.1-gd
+ sudo service apache2 restart
+ #####################################################################################################
+
+ #####################################################################################################
+
+        'registered_member_id',
+        'registration_number',
+        'engineering_discipline',
+
+
+ #####################################################################################################
+
+
+
+
+#############################################SQL-QUERIES##################################################
+N. SQL Queries
+1. Launch MySQL
+$ sudo mysql -u root -p OR sudo mysql -p -u root
+$ sudo mysql -u admin -p OR sudo mysql -p -u admin
+2. Show Database
+$ SHOW DATABASES
+3. Select DB
+$ USE ebk_sajili_digital_attendance_register;
+
+4. Table Manipulation
+i. Create Column
+
+ALTER TABLE activity_attendees ADD COLUMN registered_member_id BIGINT UNSIGNED NULL;
+ALTER TABLE activity_attendees ADD COLUMN registration_number VARCHAR(255) NULL;
+ALTER TABLE activity_attendees ADD COLUMN engineering_discipline VARCHAR(255) NULL;
+
+ALTER TABLE meeting_attendees ADD COLUMN registered_member_id BIGINT UNSIGNED NULL;
+ALTER TABLE meeting_attendees ADD COLUMN registration_number VARCHAR(255) NULL;
+ALTER TABLE meeting_attendees ADD COLUMN engineering_discipline VARCHAR(255) NULL;
+
+
+UPDATE price_proposal_responses SET  = (tax, sub_total, grand_total) VALUES (4500000, 720000, 5220000) WHERE id = 923;
+UPDATE price_proposal_responses SET sub_total = 4500000, tax = 720000, grand_total = 5220000 WHERE id = 923;
+UPDATE price_proposal_responses SET sub_total = 48894, tax = 7823.04, grand_total = 56717.04 WHERE id = 924;
+
+
+
+UPDATE price_proposals SET updated_at = '2025-05-21 15:55:21 15:55:21.000000' WHERE id = 137;
+UPDATE price_proposals SET created_at = '2025-05-09 13:47:08.000000' WHERE id = 137;
+INSERT INTO price_proposal_responses (user_id, proposal_id, created_at) VALUES (42, 137, '2025-05-09 15:47:08.000000'), (83, 137, '2025-05-09 15:47:08.000000'), (127, 137, '2025-05-09 15:47:08.000000'), (132, 137, '2025-05-09 15:47:08.000000'), (134, 137, '2025-05-09 15:47:08.000000'), (151, 137, '2025-05-09 15:47:08.000000'), (158, 137, '2025-05-09 15:47:08.000000'), (159, 137, '2025-05-09 15:47:08.000000'), (163, 137, '2025-05-09 15:47:08.000000'), (165, 137, '2025-05-09 15:47:08.000000'), (187, 137, '2025-05-09 15:47:08.000000'), (59, 137, '2025-05-09 15:47:08.000000'), (232, 137, '2025-05-09 15:47:08.000000'), (254, 137, '2025-05-09 15:47:08.000000'), (110, 137, '2025-05-09 15:47:08.000000'), (336, 137, '2025-05-09 15:47:08.000000'), (401, 137, '2025-05-09 15:47:08.000000'), (426, 137, '2025-05-09 15:47:08.000000');
+
+SELECT * FROM price_proposal_responses WHERE proposal_id = 137;
+
+UPDATE price_proposal_responses SET updated_at = '2025-05-10 16:30:28.000000' WHERE id = 1055;
+UPDATE price_proposal_responses SET created_at = '2025-05-09 15:47:08.000000' WHERE id = 1055;
+UPDATE price_proposal_responses SET created_at = '2025-08-22 14:55:01.000000', updated_at = '2025-08-25 15:50:16.000000' WHERE id = 1794;
+UPDATE price_proposal_responses SET created_at = '2025-08-22 15:18:30.000000', updated_at = '2025-08-24 15:27:35.000000' WHERE id = 1793;
+
+
+
+SHOW * FROM price_proposal_responses WHERE proposal_id ='125'
+SHOW * FROM price_proposal_responses WHERE proposal_id ='137'
+
+ALTER TABLE price_proposals ADD category_id BIGINT(11) UNSIGNED NULL;
+UPDATE price_proposals SET category_id = 3 WHERE id = 59;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+UPDATE price_proposals SET category_id = 11 WHERE id = 53;
+UPDATE price_proposals SET category_id = 3 WHERE id = 52;
+UPDATE price_proposals SET category_id = 11 WHERE id = 21;
+UPDATE price_proposals SET category_id = 11 WHERE id = 20;
+UPDATE price_proposals SET category_id = 11 WHERE id = 19;
+
+
+UPDATE price_proposal_items SET description = 'Micrososoft 365 Business Standard' WHERE ID = 86;
+UPDATE price_proposal_items SET description = 'Planner and Project Plan 2' WHERE ID = 89;
+UPDATE price_proposal_items SET quantity = 1 WHERE ID = 168;
+UPDATE price_proposal_items SET description = ("<p>Local Partner SLA</p>") WHERE ID = 175;
+UPDATE price_proposal_items SET description = ("<p>Installation&nbsp;and &nbsp;Deployment Cost</p>") WHERE ID = 169;
+UPDATE price_proposal_items SET description = ("<p>Installation&nbsp;and &nbsp;Deployment Cost</p>") WHERE ID = 169;
+
+UPDATE price_proposal_items SET description = "<figure class=\"table\"><table><tbody><tr><td>FortiGate-80F<\/td><td><p>FG-80F-BDL-809-36<\/p><p>Hardware plus FortiCare Premium and FortiGuard Enterprise Protection<\/p><\/td><td>(2 Year Plan)<\/td><\/tr><\/tbody><\/table><\/figure>" WHERE ID = 171;
+UPDATE price_proposal_items SET description = "<p>Local Partner SLA - (Year 3)</p>" WHERE ID = 174;
+
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ("<p>Local Partner SLA - (Year 1)</p>", 1, 65);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ("<p>Local Partner SLA - (Year 3)</p>", 1, 65);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ("<p>Local Partner SLA - (Year 2)</p>", 1, 65);
+
+UPDATE price_proposal_items (description, quantity, proposal_id) VALUES ("<p>Installation&nbsp;and &nbsp;Deployment Cost Year 1 (200 seats - New, 600 seats Renewals)</p>", 1, 169);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ("<figure class=\"table\"><table><tbody><tr><td><br>Installation &nbsp;and &nbsp;Deployment Cost - (2 Year Plan)<\/td><\/tr><\/tbody><\/table><\/figure>", 1, 67);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ('<p>Fortinet Firewall Deployment and Installations Cost</p>', 1, 54);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ('<p>Firewall Deployment and Installations Cost</p>', 1, 54);
+INSERT INTO price_proposal_items (description, quantity, proposal_id) VALUES ('<p>Deployment and Installations Cost</p>', 1, 74);
+
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 336);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 151);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 260);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 187);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 42);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 254);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 165);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 132);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 134);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 127);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 83);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 158);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 110);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 232);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (21, 159);
+
+DELETE FROM price_proposal_responses WHERE proposal_id = 21 AND user_id = 159;
+DELETE FROM price_proposal_responses WHERE proposal_id = 21 AND user_id = 232;
+
+DELETE FROM price_proposal_items WHERE id = 170;
+DELETE FROM price_proposal_items WHERE id = 172;
+DELETE FROM price_proposal_items WHERE id = 174;
+
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 336);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 151);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 260);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 187);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 42);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 254);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 165);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 132);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 134);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 127);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 83);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 158);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 110);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 232);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 159);
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (57, 336);
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (57, 163);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (53, 401);
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (52, 138);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (54, 401);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (55, 401);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (56, 401);
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES (58, 401);
+
+INSERT INTO price_proposal_responses (proposal_id, user_id) VALUES(54, 336), (54, 151), (54, 260), (54, 187), (54, 42), (54, 254), (54, 165), (54, 132), (54, 134), (54, 127), (54, 83), (54, 158), (54, 110), (54, 232), (54, 159);
+
+UPDATE price_proposals SET category_id = 3 WHERE id = 59;
+UPDATE price_proposals SET category_id = 11 WHERE id = 54;
+
+ALTER TABLE price_proposals MODIFY COLUMN ref_number UNSIGNED BIGINT;
+ALTER TABLE price_proposals MODIFY COLUMN ref_number BIGINT UNSIGNED;
+
+DELETE FROM price_proposal_items WHERE ID = 357;
+
+UPDATE price_proposal_responses SET sub_total = 8788.45, tax = 1406.15, grand_total = 10194.60 WHERE id = 906;
+UPDATE price_proposal_responses (sub_total, tax, proposal_id) VALUES ("<p>Installation&nbsp;and &nbsp;Deployment Cost Year 1 (200 seats - New, 600 seats Renewals)</p>", 1, 169);
+UPDATE price_proposal_response_items SET unit_price = 4394.21, total_price = 4394.21 WHERE id = 940;
+UPDATE price_proposal_response_items SET unit_price = 4394.24, total_price = 4394.24 WHERE id = 941;
+UPDATE price_proposal_response_items SET unit_price = 0, total_price = 0 WHERE id = 942;
+
+UPDATE price_proposal_response_items SET unit_price = 8500, total_price = 8500 WHERE id = 1166;
+UPDATE price_proposal_response_items SET unit_price = 150, total_price = 150 WHERE id = 1167;
+UPDATE price_proposal_responses SET sub_total = 8650, tax = 1384, grand_total = 10034 WHERE id = 1272;
+UPDATE price_proposal_responses SET updated_at = null WHERE id = 1166;
+UPDATE price_proposal_responses SET created_at = '2025-04-09 10:47:08.000000' WHERE id = 1166;
+UPDATE price_proposal_responses SET updated_at = '2025-07-02 12:16:01.000000' WHERE id = 1456;
+
+22/08/2025 14:55:01
+
+
+UPDATE price_proposal_items (id, proposal_id, description, created_at) VALUES (357, 125, '<p>Security Information and Events Management Tool</p>', '2025-05-09 07:30:27.000000');
+
+INSERT price_proposal_items SET proposal_id = 137, 'quantity'=1, description = '<p>Security Information and Events Management Tool</p>', created_at = '2025-05-26 12:03:18.000000';
+
+INSERT INTO price_proposal_items ( proposal_id, quantity, description, created_at ) VALUES ( 137, 1, '<p>Security Information and Events Management Tool</p>', '2025-05-26 12:03:18.000000' );
+UPDATE price_proposal_items SET quantity = 1, description = '<p>Installation&nbsp;and &nbsp;Deployment Cost</p>', created_at = '2025-05-26 12:03:18.000000' WHERE id = 379;
+UPDATE price_proposal_items SET quantity = 1, description = '<p>Installation&nbsp;and &nbsp;Deployment Cost</p>', created_at = '2025-05-26 12:03:18.000000' WHERE id = 380;
+UPDATE price_proposal_items SET quantity = 1, description = '<p>Network Performance Monitoring Tool</p>', created_at = '2025-05-26 12:03:18.000000' WHERE id = 468;
+#############################################./SQL-QUERIES##################################################
+
+
+#############################################COPY-MySQL-DATABASE-ACROSS-UBUNTU-SERVERS##################################################
+Step 1: Dump the database on the source server
+- SSH into the source server where the database is hosted.
+- Use the mysqldump command to export the database into a file:
+$ mysqldump -u root -p konza_oss_software_vendors_management > konza_oss_software_vendors_portal.sql
+
+Step 2: Transfer the database dump to the destination server
+- You can use scp to securely copy the .sql file to the destination server.
+$ scp konza_oss_software_vendors_portal.sql root@192.168.0.49:/var/www/html
+$ scp konza_oss_software_vendors_portal.sql admin@192.168.0.49:/var/www/html
+
+Step 3: Import the database on the destination server
+- SSH into the destination server.
+- Log into MySQL or MariaDB on the destination server:
+$ mysql -u admin -p
+- CREATE DATABASE new_database_name;
+$ CREATE DATABASE kotda_sajili_digital_attendance_register;
+- Exit MySQL, and then import the .sql dump file into the new database:
+mysql -u admin -p kotda_sajili_digital_attendance_register < /var/www/html/kotda_attendance_register.sql
+
+Step 4: Verify the database
+- Log in to MySQL on the destination server and verify that the database was imported correctly by listing the databases:
+mysql -u admin -p
+SHOW DATABASES;
+USE kotda_sajili_digital_attendance_register;
+SHOW TABLES;
+
+OR
+
+Q.II. Use pv to monitor progress
+- You can use the pv (pipe viewer) tool to monitor the progress of the import and get a better sense of how much time it will take.
+First, install pv:
+$ sudo apt-get install pv
+- Then use it in the import command:
+$ pv kotda_attendance_register.sql | mysql -u admin -p kotda_sajili_digital_attendance_register
+#############################################./COPY-MySQL-DATABASE-ACROSS-UBUNTU-SERVERS##################################################
