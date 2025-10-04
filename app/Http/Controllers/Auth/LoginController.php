@@ -57,8 +57,10 @@ class LoginController extends Controller
             // Redirect_based_on_role
             if ($user->role_id === 1) {
                 return redirect('/dashboard')->with('success', 'Welcome back, ' . $user->name . '!');
-            } else{
+            }elseif ($user->role_id === 2) {
                 return redirect('/event-booking')->with('success', 'Welcome back, ' . $user->name . '!');
+            }else{
+                return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
             }
 
         }
