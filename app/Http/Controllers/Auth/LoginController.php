@@ -52,20 +52,21 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('dashboard')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
-              $user = Auth::user();
-            // Redirect_based_on_role
+            $user = Auth::user();
+
+            // Redirect based on role_id
             if ($user->role_id === 1) {
                 return redirect('/dashboard')->with('success', 'Welcome back, ' . $user->name . '!');
-            }elseif ($user->role_id === 2) {
+            } elseif ($user->role_id === 2) {
                 return redirect('/event-booking')->with('success', 'Welcome back, ' . $user->name . '!');
-            }else{
+            } else {
                 return redirect('/')->with('success', 'Welcome back, ' . $user->name . '!');
             }
-
         }
+
         return back()->with('danger', 'Invalid login credentials');
     }
+
 
     /**
      * Override logout
