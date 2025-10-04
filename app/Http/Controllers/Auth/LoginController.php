@@ -55,7 +55,7 @@ class LoginController extends Controller
             return redirect()->route('dashboard')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
               $user = Auth::user();
             // Redirect_based_on_role
-            if ($user->role_id == 1) {
+            if ($user->role_id === 1) {
                 return redirect('/dashboard')->with('success', 'Welcome back, ' . $user->name . '!');
             } else{
                 return redirect('/event-booking')->with('success', 'Welcome back, ' . $user->name . '!');
