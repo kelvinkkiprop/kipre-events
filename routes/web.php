@@ -7,6 +7,7 @@ use App\Http\Controllers\Main\DashboardController;
 use App\Http\Controllers\Main\UserController;
 use App\Http\Controllers\Main\ContactController;
 use App\Http\Controllers\Main\EventBookingController;
+use App\Http\Controllers\Main\EventRegistrationController;
 //Settings
 use App\Http\Controllers\Settings\ProfileController;
 
@@ -68,6 +69,15 @@ Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard'
 */
 Route::resource('profile', ProfileController::class);
 
+
+/*
+|--------------------------------------------------------------------------
+| EventBookingController
+|--------------------------------------------------------------------------
+*/
+Route::resource('event-booking', EventBookingController::class);
+Route::post('search-event-booking', [EventBookingController::class, 'searchItems']);
+
 /*
 |--------------------------------------------------------------------------
 | UserController
@@ -79,9 +89,8 @@ Route::post('search-users', [UserController::class, 'searchItems']);
 
 /*
 |--------------------------------------------------------------------------
-| EventBookingController
+| EventRegistrationController
 |--------------------------------------------------------------------------
 */
-Route::resource('event-booking', EventBookingController::class);
-Route::post('search-event-booking', [EventBookingController::class, 'searchItems']);
-
+Route::resource('event-registrations', EventRegistrationController::class);
+Route::post('search-event-registrations', [EventRegistrationController::class, 'searchItems']);

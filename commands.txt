@@ -58,12 +58,12 @@ php artisan make:model Main/Meeting -m
 php artisan make:model Main/EventCategory -m
 php artisan make:model Main/EventPackage -m
 php artisan make:model Main/EventRegistration -m
+php artisan make:model Main/EventSession -m
 php artisan make:model Settings/Role -m
+php artisan make:model Others/UserStatus -m
 php artisan make:model Others/Title -m
 php artisan make:model Others/Country -m
-php artisan make:model Others/Position -m
-php artisan make:model Main/Activity -m
-php artisan make:model Main/ActivityAttendee -m
+php artisan make:model Others/ModeOfAttandance -m
 
 
 6. Middleware
@@ -118,6 +118,7 @@ $fa-font-path:"../webfonts";
 C. ADMIN-LTE
 1. Installation
 npm install admin-lte@^3.1 --save
+npm install admin-lte@4.0.0-rc3 --save
 
 2. Usage
 -Add below line to app.scss
@@ -125,7 +126,6 @@ npm install admin-lte@^3.1 --save
 -Add to bootstrap inside resource/js
 require('admin-lte');
 #####################################################################################################
-
 
 
 #####################################################################################################

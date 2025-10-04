@@ -1,87 +1,66 @@
-<!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="/" class="brand-link">
-        <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
-    </a>
+<!-------------------------------------------------sidebar------------------------------------------------->
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image text-white1">
-                {{-- <i class="fas fa-user-circle fa-3x mt-2 img-circle elevation-2" alt="User Image"></i> --}}
-                 <div class="alert alert-success rounded h5 font-weight-bold">
-                    {{ preg_filter('/[^A-Z]/', '', Auth::user()->name) }}
-                </div>
-            </div>
-            <div class="info">
-                @if (Auth::user() != null)
-                    <a href="/dashboard" class="d-block">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <small class="text-white"><i class="fas fa-circle text-success"></i>&nbsp;Online</small>
-                @endif
-            </div>
-        </div>
+    <div class="sidebar-brand">
+        <a href="./index.html" class="brand-link">
+            <img src="{{ asset('images/ISC-2025.jpg') }}" alt="Logo" class="brand-image opacity-75 shadow"/>
+            <span class="brand-text fw-light">{{ config('app.name', 'Laravel') }}</span>
+        </a>
+    </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2 sidebarmenu">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation" aria-label="Main navigation" data-accordion="false" id="navigation">
                 <li class="nav-item">
                     <a href="/dashboard" class="{{ Request::path() == 'dashboard' ? 'nav-link active' : 'nav-link' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+
                 <li class="nav-header">MAIN</li>
                 <li class="nav-item">
-                    <a href="/activities"
-                        class="{{ Request::path() == 'activities' ? 'nav-link active' : 'nav-link' }}">
-                        <i class="nav-icon fas fa-layer-group"></i>
-                        <p>Activities</p>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-people-fill"></i>
+                        <p>Users <i class="nav-arrow bi bi-chevron-right"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/users" class="{{ Request::path() == 'users' ? 'nav-link active' : 'nav-link' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Users list</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users/create" class="{{ Request::path() == 'users' ? 'nav-link active' : 'nav-link' }}">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Create user</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="/meetings" class="{{ Request::path() == 'meetings' ? 'nav-link active' : 'nav-link' }}">
-                        <i class="nav-icon fas fa-handshake"></i>
-                        <p>Meetings</p>
+                    <a href="/event-registrations" class="{{ Request::path() == 'event-registrations' ? 'nav-link active' : 'nav-link' }}">
+                        <i class="nav-icon bi bi-calendar2-event-fill"></i>
+                        <p>Registrations</p>
                     </a>
                 </li>
 
-                <li class="nav-header">MANAGE</li>
-                <!-- Admin -->
-                {{-- @if (Auth::user()->role == 1) --}}
-                <li class="nav-item">
-                    <a href="/venues" class="{{ Request::path() == 'venues' ? 'nav-link active' : 'nav-link' }}">
-                        <i class="nav-icon fas fa-location"></i>
-                        <p>Venues</p>
-                    </a>
-                </li>
-                {{-- @endif --}}
-                <!-- Admin -->
-                @if (Auth::user()->role == 1)
-                    <li class="nav-item">
-                        <a href="/users" class="{{ Request::path() == 'users' ? 'nav-link active' : 'nav-link' }}">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Users</p>
-                        </a>
-                    </li>
-                @endif
 
-                <li class="nav-header">SETTINGS</li>
-                <li class="nav-item">
-                    <a href="/profile" class="{{ Request::path() == 'profile' ? 'nav-link active' : 'nav-link' }}">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>Profile</p>
+                <li class="nav-header">OTHER</li>
+                 <li class="nav-item">
+                     <a class="{{ Request::path() == 'logout' ? 'nav-link active' : 'nav-link' }}" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                         <i class="bi bi-box-arrow-left"></i>
+                        <p>Log Out</p>
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
+
             </ul>
         </nav>
-        <!-- /.Sidebar Menu -->
-
     </div>
-    <!-- /.Sidebar -->
 
 </aside>
-<!-- ./Main Sidebar Container -->
+<!-------------------------------------------------./sidebar------------------------------------------------->

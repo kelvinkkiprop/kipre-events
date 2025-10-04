@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // Add
 use Illuminate\Support\Str;
+use App\Models\Settings\Role;
+use App\Models\Others\UserStatus;
 
 class User extends Authenticatable
 {
@@ -75,5 +77,44 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+
+    /**
+     * appends
+     */
+    protected $appends = [
+        'name',
+    ];
+
+
+    /**
+    * GETTERS_AND_SETTERS
+    */
+    public function getNameAttribute()
+    {
+        $value = $this->first_name;
+        $value2 = $this->last_name;
+        if(is_null($value) || is_null($value2)){
+            return "";
+        }
+        return $value.' '.$value2;
+    }
+
+
+
+    /**
+     * role
+     */
+    public function role(){
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+
+    /**
+     * status
+     */
+    public function status(){
+        return $this->hasOne(UserStatus::class, 'id', 'status_id');
     }
 }

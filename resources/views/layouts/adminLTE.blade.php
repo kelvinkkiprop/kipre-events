@@ -5,119 +5,117 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRFToken -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- AppName -->
-    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <!--FivoIcon-->
     {{-- <link href="{{ asset('images/logo.png') }}" rel="icon" type="image/x-icon" /> --}}
     <link href="{{ asset('images/favicon.png') }}" rel="icon" type="image/x-icon" />
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> --}}
-    {{-- <link href="https://fonts.googleapis.com/css?family=Manrope" rel="stylesheet"> --}}
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> --}}
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- BoostrapIcons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <!-------------------------------------------------./head------------------------------------------------->
 
 <!-------------------------------------------------body------------------------------------------------->
-<body class="hold-transition sidebar-mini" >
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
 
     <!-------------------------------------------------wrapper------------------------------------------------->
-    <div class="wrapper">
+    <div id="adminLTE" class="app-wrapper">
 
-        <!-----------------------------------------adminLTE-------------------------------------------------->
-        <section id="adminLTE">
-
-            <!-----------------------------------------nav--------------------------------------------------->
-            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-------------------------------------------------nav------------------------------------------------->
+        <nav class="app-header navbar navbar-expand bg-body">
+            <div class="container-fluid">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                    </li>
-                </ul>
-                <form class="form-inline ml-3">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Right navbar links -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Right Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-user-circle mt-2"></i>
-                            @if(Auth::user() != null)
-                                <span>&nbsp;{{Auth::user()->name}}</span>
-                            @endif
+                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="bi bi-list"></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="/" class="dropdown-item">
-                                <i class="fas fa-home fa-fw" aria-hidden="true"></i>Home</a>
-                            </a>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt fa-fw" aria-hidden="true"></i>Logout</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a href="/event-booking" class="nav-link">Event Booking</a>
                     </li>
                 </ul>
-
-            </nav>
-            <!-----------------------------------------./nav--------------------------------------------------->
-
-            <!-----------------------------------------sidebar--------------------------------------------------->
-            @include('inc.sidebar')
-            <!-----------------------------------------./sidebar--------------------------------------------------->
-
-            <!-----------------------------------------content-wrapper--------------------------------------------------->
-            <div class="content-wrapper">
-
-                <!-------------------------------------------------main------------------------------------------------->
-                <main class="py-4">
-
-                    <!-------------------------------------------------messages------------------------------------------------->
-                    <div class="container-fluid">
-                        @include('inc.messages')
-                    </div>
-                    <!-------------------------------------------------./messages------------------------------------------------->
-
-
-                    @yield('content')
-                </main>
-                <!-------------------------------------------------./main------------------------------------------------->
-
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                            <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                            <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown user-menu">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span class="user-image rounded-circle shadow-sm bg-primary p-2 text-light">{{ preg_filter('/[^A-Z]/', '', Auth::user()->name) }}</span>
+                            <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                            <li class="user-header text-bg-primary">
+                                <span class="rounded-circle shadow display-5 p-2 m-3">{{ preg_filter('/[^A-Z]/', '', Auth::user()->name) }}</span>
+                                <p>
+                                    {{ Auth::user()->name }} - Web Developer
+                                    <small>Member since {{ Carbon\Carbon::parse(Auth::user()->created_at)->format('d M, y') }}</small>
+                                </p>
+                            </li>
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <a href="/dashboard">Dashboard</a>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <a href="/event-registrations">Registrations</a>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <a href="/users">Users</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="user-footer">
+                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a class="btn btn-default btn-flat float-end" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <!-----------------------------------------./content-wrapper--------------------------------------------------->
+        </nav>
+        <!-------------------------------------------------./nav------------------------------------------------->
 
-        </section>
-        <!-----------------------------------------./adminLTE--------------------------------------------------->
+        <!-----------------------------------------sidebar--------------------------------------------------->
+        @include('inc.sidebar')
+        <!-----------------------------------------./sidebar--------------------------------------------------->
+
+        <!-------------------------------------------------main------------------------------------------------->
+        <main class="app-main py-2">
+
+            <!-------------------------------------------------messages------------------------------------------------->
+            <div class="container-fluid">
+                @include('inc.messages')
+            </div>
+            <!-------------------------------------------------./messages------------------------------------------------->
+
+            @yield('content')
+        </main>
+        <!-------------------------------------------------./main------------------------------------------------->
 
         <!-----------------------------------------footer--------------------------------------------------->
-        <footer class="main-footer">
-            <strong class="pull-center">&copy;&nbsp;{{date('Y')}}&nbsp;<a href="/" class="text-success">{{config('app.name', 'Laravel')}}</a>. All rights reserved</strong>
-            <span class="float-right d-none d-sm-block">Powered by&nbsp;<a href="http://konza.go.ke" target="_blank" rel="noopener noreferrer" class="text-success">Konza Technopolis</a></span>
-        </footer>
+        <footer class="app-footer">
+            <div class="float-end d-none d-sm-inline">Powered by <a href="http://kipre.go.ke" target="_blank" rel="noopener noreferrer">Primate Research</a></div>
+            <strong>Copyright &copy&nbsp;{{date('Y')}}&nbsp; <a href="/" class="text-decoration-none">{{config('app.name', 'Laravel')}}</a>.</strong> All rights reserved.
+      </footer>
         <!-----------------------------------------./footer--------------------------------------------------->
 
     </div>
     <!-------------------------------------------------wrapper------------------------------------------------->
 
-
 </body>
 <!-------------------------------------------------./body------------------------------------------------->
-
-</html>

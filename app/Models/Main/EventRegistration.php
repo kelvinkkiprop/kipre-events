@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Main\Event;
-use App\Models\Main\EventTicket;
+use App\Models\Main\EventPackage;
 use App\Models\Other\PaymentMethod;
+use App\Models\Others\ModeOfAttandance;
 
 class EventRegistration extends Model
 {
@@ -43,7 +44,47 @@ class EventRegistration extends Model
         'address_invitation_to',
         'payment_method_id',
         'package_id',
+
+        'student_id',
+        'other_position',
+        'mode_of_attendance_id',
+        'will_present',
+        'session_to_present_id',
+        'abstract',
     ];
+
+
+    /**
+     * appends
+     */
+    protected $appends = [
+        'abstract_url',
+        'student_id_url',
+    ];
+
+    /**
+    * GETTERS_AND_SETTERS
+    */
+    public function getAbstractUrlAttribute()
+    {
+        $value = $this->abstract;
+        if(is_null($value)){
+            return null;
+        }else{
+            $path = config('app.asset_url').config('app.paths.file_download');
+            return $path.$value;
+        }
+    }
+    public function getStudentIdUrlAttribute()
+    {
+        $value = $this->student_id;
+        if(is_null($value)){
+            return null;
+        }else{
+            $path = config('app.asset_url').config('app.paths.file_download');
+            return $path.$value;
+        }
+    }
 
     /**
      * user
@@ -67,9 +108,16 @@ class EventRegistration extends Model
     }
 
     /**
-     * eventTicket
+     * package
      */
-    public function eventTicket(){
-        return $this->hasOne(EventTicket::class, 'id', 'event_ticket_id');
+    public function package(){
+        return $this->hasOne(EventPackage::class, 'id', 'package_id');
+    }
+
+    /**
+     * attandanceMode
+     */
+    public function attandanceMode(){
+        return $this->hasOne(ModeOfAttandance::class, 'id', 'package_id');
     }
 }

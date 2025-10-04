@@ -7,6 +7,12 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+// AdminLTE
+// @import '~admin-lte/dist/css/adminlte.css';
+
+//AdminLTE
+// @import 'admin-lte/dist/css/adminlte.css';
+@import "admin-lte/dist/css/adminlte.min.css";
 
 /*--------------------------------------COMMON------------------------------------------*/
 html {
@@ -29,7 +35,10 @@ body {
 .border-bottom-dotted {
   border-bottom: 2px dotted $gray-500; /* change thickness & color as needed */
 }
-
+.required:after {
+    content:" *";
+        color: $red;
+}
 /*--------------------------------------COMMON------------------------------------------*/
 
 /*-------------------------------------------------APP-------------------------------------------------*/

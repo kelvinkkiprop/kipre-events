@@ -1,6 +1,13 @@
 import './bootstrap';
 
 
+// AdminLTE
+// AdminLte
+// require("admin-lte");
+import "admin-lte/dist/js/adminlte.min.js";
+
+// require('admin-lte');
+
 /*--------------------------------------addEventListener------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function () {
 

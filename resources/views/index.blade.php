@@ -205,7 +205,7 @@
             </div>
         </div>
         <div class="text-center my-1">
-            <a class="btn btn-primary btn-lg rounded-0" href="#"><small class="fw-bold">DOWNLOAD SCHEDULES</small></a>
+            <a class="btn btn-primary btn-lg rounded-0" href="{{ asset('docs/KIPRE_JOINT_CONFERENCE_PROGRAM_30th_SEPT_2025.pdf') }}" target="_blank"><small class="fw-bold">DOWNLOAD SCHEDULES</small></a>
         </div>
     </section>
 

@@ -10,9 +10,11 @@ use App\Models\User;
 use App\Models\Main\Event;
 use App\Models\Main\EventPackage;
 use App\Models\Main\EventRegistration;
+use App\Models\Main\EventSession;
 use App\Models\Others\Country;
 use App\Models\Others\Title;
 use App\Models\Others\Position;
+use App\Models\Others\ModeOfAttandance;
 
 
 class EventBookingController extends Controller
@@ -62,6 +64,8 @@ class EventBookingController extends Controller
         $countries = Country::orderBy('name', 'asc')->get();
         $titles = Title::orderBy('name', 'asc')->get();
         $positions = Position::orderBy('id', 'asc')->get();
+        $sessions = EventSession::orderBy('name', 'asc')->get();
+        $modes = ModeOfAttandance::orderBy('name', 'asc')->get();
 
         return view('event-booking.show')->with([
             'user'      =>  $user,
@@ -69,6 +73,8 @@ class EventBookingController extends Controller
             'countries'   =>  $countries,
             'titles'   =>  $titles,
             'positions'   =>  $positions,
+            'sessions'   =>  $sessions,
+            'modes'   =>  $modes,
         ]);
     }
 
@@ -86,7 +92,7 @@ class EventBookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // return $request->all();
+        // dd($request->all());
         $this -> validate($request, [
             'title_id' => 'required|integer',
             'first_name' => 'required|string',
@@ -98,10 +104,18 @@ class EventBookingController extends Controller
             'physical_address' => 'nullable|string',
             'country_id' => 'required|integer',
             'position_id' => 'required|integer',
+
+            'student_id' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'other_position' => 'nullable|string',
+            'mode_of_attendance_id' => 'nullable|string',
+            'will_present' => 'nullable|string',
+            'session_to_present_id' => 'nullable|string',
+            'abstract' => 'nullable|file|mimes:pdf',
         ]);
 
-        $uid = Auth::user()->id;
-        $item = User::where('id', $uid)->update([
+        $mCurrentUser = Auth::user();
+        $path_uploads = config('app.paths.file_upload');
+        $item = User::where('id', $mCurrentUser->id)->update([
             'title_id' => $request['title_id'],
             'first_name' => $request['first_name'],
             'middle_name' => $request['middle_name'],
@@ -114,10 +128,29 @@ class EventBookingController extends Controller
             'position_id' => $request['position_id'],
         ]);
 
+        $mStudentID=null;
+        if($request->hasFile('student_id')!=null){
+            $mStudentID = time().uniqid().'.'.$request->student_id->extension();
+            $request->student_id->storeAs($path_uploads, $mStudentID, 'public');
+
+        }
+        $mAbstract=null;
+        if($request->hasFile('abstract')!=null){
+            $mAbstract = time().uniqid().'.'.$request->abstract->extension();
+            $request->abstract->storeAs($path_uploads, $mAbstract, 'public');
+
+        }
+
         $item2=EventRegistration::create([
-            'user_id' => $uid,
+            'user_id' => $mCurrentUser->id,
             'event_id' => Event::first()->id,
             'package_id' => $id,
+            'student_id' => $mStudentID,
+            'other_position' => $request['other_position'],
+            'mode_of_attendance_id' => $request['mode_of_attendance_id'],
+            'will_present' => $request['will_present'],
+            'session_to_present_id' => $request['session_to_present_id'],
+            'abstract' => $mAbstract,
         ]);
 
 

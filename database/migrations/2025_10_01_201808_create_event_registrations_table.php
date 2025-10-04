@@ -23,6 +23,12 @@ return new class extends Migration
             $table->integer('status_id')->default(1);
             $table->integer('require_formal_invitation')->nullable();
             $table->longText('address_invitation_to')->nullable();
+            $table->string('student_id')->nullable();
+            $table->string('other_position')->nullable();
+            $table->string('mode_of_attendance_id')->nullable();
+            $table->string('will_present')->nullable();
+            $table->string('session_to_present_id')->nullable();
+            $table->string('abstract')->nullable();
             $table->timestamps();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
