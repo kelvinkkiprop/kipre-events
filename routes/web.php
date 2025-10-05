@@ -77,6 +77,8 @@ Route::resource('profile', ProfileController::class);
 */
 Route::resource('event-booking', EventBookingController::class);
 Route::post('search-event-booking', [EventBookingController::class, 'searchItems']);
+Route::get('checkout/{id}', [EventBookingController::class, 'checkout']);
+Route::post('checkout/{id}', [EventBookingController::class, 'checkoutItem']);
 
 /*
 |--------------------------------------------------------------------------

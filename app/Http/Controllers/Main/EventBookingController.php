@@ -92,13 +92,15 @@ class EventBookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // return Event::get();
         // dd($request->all());
+        // return $request->all();
         $this -> validate($request, [
             'title_id' => 'required|integer',
             'first_name' => 'required|string',
             'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email,'.$id,
+            'email' => 'required|string|email|unique:users,email',
             'phone' => 'required|string',
             'institution' => 'required|string',
             'physical_address' => 'nullable|string',
@@ -106,11 +108,14 @@ class EventBookingController extends Controller
             'position_id' => 'required|integer',
 
             'student_id' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
-            'other_position' => 'nullable|string',
+            // 'other_position' => 'nullable|string',
+            'other_position' => 'required_if:position_id,9|string|nullable',
             'mode_of_attendance_id' => 'nullable|string',
-            'will_present' => 'nullable|string',
-            'session_to_present_id' => 'nullable|string',
-            'abstract' => 'nullable|file|mimes:pdf',
+            'will_present' => 'required|in:Yes, Poster,Yes, Talk,No',
+            // 'session_to_present_id' => 'nullable|string',
+            'session_to_present_id' => 'nullable|string|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
+            // 'abstract' => 'nullable|file|mimes:pdf',
+            'abstract' => 'nullable|file|mimes:pdf|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
         ]);
 
         $mCurrentUser = Auth::user();
@@ -151,10 +156,12 @@ class EventBookingController extends Controller
             'will_present' => $request['will_present'],
             'session_to_present_id' => $request['session_to_present_id'],
             'abstract' => $mAbstract,
+            'invoice_number' => time(),
         ]);
 
-
-        return redirect('/')->with('success', 'Details saved successfully');
+        // $newId = $item2->id;
+        // return $newId;
+        return redirect('/checkout/'.$item2->id)->with('success', 'Details saved successfully');
         // return redirect()->route('events.edit', $item2->id)->with('success', 'Details saved successfully');
 
     }
@@ -166,4 +173,39 @@ class EventBookingController extends Controller
     {
         //
     }
+
+
+    /**
+     * checkout
+     */
+    public function checkout(string $id)
+    {
+
+        $item = EventRegistration::with(['package'])->find($id);
+        // return $item;
+        return view('event-booking.checkout')->with([
+            'item'  =>  $item,
+        ]);
+    }
+
+
+    /**
+     * checkoutItem
+     */
+    public function checkoutItem(string $id)
+    {
+
+    //    $this -> validate($request, [
+    //         'status_id' => 'required|integer',
+    //     ]);
+
+        $item = EventRegistration::where('id', $id)->update([
+            'status_id' => 2,
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+        return redirect()->back()->with('info', 'Payment status updated successfully');
+
+
+    }
+
 }

@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use App\Models\Settings\Role;
 use App\Models\Others\UserStatus;
+use App\Models\Others\Country;
+use App\Models\Others\Title;
+use App\Models\Others\Position;
 
 class User extends Authenticatable
 {
@@ -117,4 +120,26 @@ class User extends Authenticatable
     public function status(){
         return $this->hasOne(UserStatus::class, 'id', 'status_id');
     }
+
+    /**
+     * country
+     */
+    public function country(){
+        return $this->hasOne(Country::class, 'id', 'country_id');
+    }
+
+    /**
+     * title
+     */
+    public function title(){
+        return $this->hasOne(Title::class, 'id', 'position_id');
+    }
+
+    /**
+     * position
+     */
+    public function position(){
+        return $this->hasOne(Position::class, 'id', 'position_id');
+    }
+
 }

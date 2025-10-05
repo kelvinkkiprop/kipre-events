@@ -9,7 +9,7 @@
 </div>
 
 <div class="container py-4">
-    <form method="POST" action="/event-booking/{{ $user->id }}" enctype="multipart/form-data">
+    <form method="POST" action="/event-booking/{{ $package->id }}" enctype="multipart/form-data">
         <div class="row justify-content-center my-5">
             @csrf
             <div class="mb-3 col-md-12">
@@ -17,7 +17,7 @@
                  @if ($titles->count() > 0)
                     @foreach ($titles as $item)
                         <div class="form-check">
-                            <input class="form-check-input @error('title_id') is-invalid @enderror" type="radio" name="title_id" id="title_id_no" value="0" {{ old('title_id') == 0 ? 'checked' : '' }}>
+                            <input class="form-check-input @error('title_id') is-invalid @enderror" type="radio" name="title_id" id="title_id_no" value="{{ $item->id }}">
                             <label class="form-check-label" for="title_id_no">{{ $item->name }}</label>
                         </div>
                         @error('title_id')
@@ -123,9 +123,9 @@
                     </span>
                 @enderror
             </div>
-            <div class="mb-3 col-md-12">
+            <div class="mb-3 col-md-12" id="other_position_wrapper">
                 <label for="other_position" class="col-form-label">Specify Position:</label>
-                <input value="{{ $user->other_position }}" id="other_position" type="text" class="form-control @error('other_position') is-invalid @enderror" name="other_position" required>
+                <input value="{{ $user->other_position }}" id="other_position" type="text" class="form-control @error('other_position') is-invalid @enderror" name="other_position">
                 @error('other_position')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -134,7 +134,7 @@
             </div>
             <div class="mb-3 col-md-12">
                 <label for="student_id" class="col-form-label">Upload Student Confirmation Document e.g. Student ID, Letter from Learning Institution etc.:</label>
-                <input value="{{ $user->student_id }}" id="student_id" type="file" class="form-control @error('student_id') is-invalid @enderror" name="student_id" required>
+                <input value="{{ $user->student_id }}" id="student_id" type="file" class="form-control @error('student_id') is-invalid @enderror" name="student_id">
                 @error('student_id')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
                 @if ($modes->count() > 0)
                     @foreach ($modes as $item)
                         <div class="form-check">
-                            <input class="form-check-input @error('mode_of_attendance_id') is-invalid @enderror" type="radio" name="mode_of_attendance_id" id="mode_of_attendance_id" value="0" {{ old('mode_of_attendance_id') == 0 ? 'checked' : '' }}>
+                            <input class="form-check-input @error('mode_of_attendance_id') is-invalid @enderror" type="radio" name="mode_of_attendance_id" id="mode_of_attendance_id" value="{{ $item->id }}">
                             <label class="form-check-label" for="mode_of_attendance_id">{{ $item->name }}</label>
                         </div>
                         @error('mode_of_attendance_id')
@@ -160,15 +160,15 @@
             <div class="mb-3 col-md-12">
                 <label for="will_present" class="col-form-label required">Would you like to present at the Conference?:</label>
                 <div class="form-check">
-                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="Yes, Poster" {{ old('will_present') == 0 ? 'checked' : '' }}>
+                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="Yes, Poster" {{ old('will_present') == 'Yes, Poster' ? 'checked' : '' }}>
                     <label class="form-check-label" for="will_present">Yes, Poster</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="Yes, Talk" {{ old('will_present') == 0 ? 'checked' : '' }}>
+                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="Yes, Talk" {{ old('will_present') == 'Yes, Talk' ? 'checked' : '' }}>
                     <label class="form-check-label" for="will_present">Yes, Talk</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="No" {{ old('will_present') == 0 ? 'checked' : '' }}>
+                    <input class="form-check-input @error('will_present') is-invalid @enderror" type="radio" name="will_present" id="will_present" value="No" {{ old('will_present') == 'No' ? 'checked' : '' }}>
                     <label class="form-check-label" for="will_present">No</label>
                 </div>
                 @error('will_present')
@@ -177,30 +177,32 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3 col-md-12">
-                <label for="session_to_present_id" class="col-form-label required">Which session would you like to present?:</label>
-                <select value="{{ $user->session_to_present_id }}" id="session_to_present_id" type="text" class="form-control @error('session_to_present_id') is-invalid @enderror" name="session_to_present_id" required>
-                    <option value="0" disabled="true" selected="true">--- Select Session ---</option>
-                    @if ($sessions->count() > 0)
-                        @foreach ($sessions as $item3)
-                            <option value="{{ $item3->id }}">{{ $item3->name }}</option>
-                        @endforeach
-                    @endif
-                </select>
-                @error('session_to_present_id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="mb-3 col-md-12">
-                <label for="abstract" class="col-form-label">Upload an abstract (250 words, Times new romans 12, Continuous pros):</label>
-                <input value="{{ $user->abstract }}" id="abstract" type="file" class="form-control @error('abstract') is-invalid @enderror" name="abstract" required>
-                @error('abstract')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+            <div class="row" id="presentation_details">
+                <div class="mb-3 col-md-12">
+                    <label for="session_to_present_id" class="col-form-label required">Which session would you like to present?:</label>
+                    <select value="{{ $user->session_to_present_id }}" id="session_to_present_id" type="text" class="form-control @error('session_to_present_id') is-invalid @enderror" name="session_to_present_id">
+                        <option value="0" disabled="true" selected="true">--- Select Session ---</option>
+                        @if ($sessions->count() > 0)
+                            @foreach ($sessions as $item3)
+                                <option value="{{ $item3->id }}">{{ $item3->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('session_to_present_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label for="abstract" class="col-form-label">Upload an abstract (250 words, Times new romans 12, Continuous pros):</label>
+                    <input value="{{ $user->abstract }}" id="abstract" type="file" class="form-control @error('abstract') is-invalid @enderror" name="abstract">
+                    @error('abstract')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">@method('PUT') Submit Now</button>
@@ -208,5 +210,40 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Will_Present
+        const radios = document.querySelectorAll("input[name='will_present']");
+        const details = document.getElementById("presentation_details");
+        details.style.display = "none";
+
+        radios.forEach(radio => {
+            radio.addEventListener("change", function() {
+                if (this.value === "Yes, Poster" || this.value === "Yes, Talk") {
+                    details.style.display = "block";
+                } else {
+                    details.style.display = "none";
+                }
+            });
+        });
+
+        const select = document.getElementById("position_id");
+        const wrapper = document.getElementById("other_position_wrapper");
+        wrapper.style.display = "none";
+        function toggleOther() {
+            if (select.value === "9") {
+                wrapper.style.display = "block";
+            } else {
+                wrapper.style.display = "none";
+                document.getElementById("other_position").value = ""; // clear when hidden
+            }
+        }
+
+        // Run
+        toggleOther();
+        select.addEventListener("change", toggleOther);
+    });
+</script>
 
 @endsection

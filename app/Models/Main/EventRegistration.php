@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Main\Event;
 use App\Models\Main\EventPackage;
+use App\Models\Main\EventRegistrationStatus;
+use App\Models\Main\EventSession;
 use App\Models\Other\PaymentMethod;
 use App\Models\Others\ModeOfAttandance;
 
@@ -94,6 +96,13 @@ class EventRegistration extends Model
     }
 
     /**
+     * status
+     */
+    public function status(){
+        return $this->hasOne(EventRegistrationStatus::class, 'id', 'status_id');
+    }
+
+    /**
      * paymentMethod
      */
     public function paymentMethod(){
@@ -115,9 +124,16 @@ class EventRegistration extends Model
     }
 
     /**
-     * attandanceMode
+     * attendanceMode
      */
-    public function attandanceMode(){
-        return $this->hasOne(ModeOfAttandance::class, 'id', 'package_id');
+    public function attendanceMode(){
+        return $this->hasOne(ModeOfAttandance::class, 'id', 'mode_of_attendance_id');
+    }
+
+    /**
+     * sessionToPresent
+     */
+    public function sessionToPresent(){
+        return $this->hasOne(EventSession::class, 'id', 'session_to_present_id');
     }
 }

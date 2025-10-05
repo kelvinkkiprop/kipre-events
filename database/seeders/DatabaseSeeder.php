@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,
             ModeOfAttandanceSeeder::class,
             EventSessionSeeder::class,
+            EventRegistrationStatusSeeder::class,
         ]);
 
 

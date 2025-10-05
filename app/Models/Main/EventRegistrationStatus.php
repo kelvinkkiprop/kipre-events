@@ -4,7 +4,7 @@ namespace App\Models\Main;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventPackage extends Model
+class EventRegistrationStatus extends Model
 {
-
+    //
 }

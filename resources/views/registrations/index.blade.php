@@ -26,9 +26,15 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
-                                {{-- <a href="{{ route('users.create') }}" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-plus-circle-fill"></i> Add New
-                                </a> --}}
+                                 <div class="dropdown">
+                                    <span class="btn btn-danger btn-sm" data-bs-toggle="dropdown" type="button">
+                                        <i class="bi bi-three-dots-vertical"></i> Export
+                                    </span>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item"><i class="bi bi-book"></i> PDF</a></li>
+                                        <li><a class="dropdown-item"><i class="bi bi-list"></i> Excel</a></li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="card-tools">
                                 <form method="POST" action="search-users">
@@ -59,8 +65,11 @@
                                                 <th>#</th>
                                                 <th>Event</th>
                                                 <th>User</th>
+                                                <th>Country</th>
+                                                <th>Attendance Mode</th>
                                                 <th>Package</th>
                                                 <th>Will Present</th>
+                                                <th>Session to Present</th>
                                                 <th>Abstract</th>
                                                 <th>Student ID</th>
                                                 <th>Status</th>
@@ -75,42 +84,66 @@
                                                     </td>
                                                     <td>
                                                         @if ($item->event)
-                                                            {{ $item->event->name }}
+                                                            {{ $item->event->title }}
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if ($item->user)
+                                                            @if($item->user->title)
+                                                                {{ $item->user->title->name }}.
+                                                            @endif
                                                             {{ $item->user->name }}
+                                                            @if($item->user->position)
+                                                                ({{ $item->user->position->name }})
+                                                            @endif
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($item->user)
+                                                            @if($item->user->country)
+                                                            {{ $item->user->country->name }}.
+                                                            @endif
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($item->attendanceMode)
+                                                            {{ $item->attendanceMode->name }}
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if ($item->package)
                                                             {{ $item->package->name }}
+                                                            ({{$item->package->currency_type}}. {{ $item->package->cost }})
                                                         @endif
                                                     </td>
                                                     <td>{{ $item->will_present }}</td>
+                                                    <td>
+                                                        @if ($item->sessionToPresent)
+                                                            {{ $item->sessionToPresent->name }}
+                                                        @endif
+                                                    </td>
                                                     <td><a href="{{ $item->abstract_url }}" target="_blank"><i class="bi bi-eye-fill"></i></a></td>
                                                     <td><a href="{{ $item->student_id_url }}" target="_blank"><i class="bi bi-eye-fill"></i></a></td>
                                                     <td>
                                                         @if ($item->status)
                                                             <span
-                                                                class="badge rounded-pill @if ($item->status_id == 1) bg-primary @elseif ($item->status_id == 2) bg-warning @else bg-danger @endif badge-pill">{{ $item->status->name }}</span>
+                                                                class="badge rounded-pill @if ($item->status_id == 1) bg-danger @elseif ($item->status_id == 2) bg-warning @else bg-primary @endif badge-pill">{{ $item->status->name }}</span>
                                                         @endif
                                                     </td>
                                                     <td>{{ Carbon\Carbon::parse($item->created_at)->format('d M, Y') }}</td>
-                                                    {{-- <td>
+                                                    <td>
                                                         <div class="text-nowrap">
-                                                            <a class="btn btn-outline-dark btn-sm mr-1"  href="{{ route('users.show', $item->id) }}" title="Show">
+                                                            {{-- <a class="btn btn-outline-dark btn-sm mr-1"  href="{{ route('users.show', $item->id) }}" title="Show">
                                                                 <i class="bi bi-eye-fill"></i>
-                                                            </a>
-                                                            <a class="btn btn-dark btn-sm mr-1"  href="{{ route('users.edit', $item->id) }}" title="Edit">
+                                                            </a> --}}
+                                                            <a class="btn btn-dark btn-sm mr-1"  href="{{ route('event-registrations.edit', $item->id) }}" title="Edit">
                                                                 <i class="bi bi-pencil-fill"></i>
                                                             </a>
-                                                            @if ($item->created_by == Auth::user()->id || Auth::user()->role_id == 1)
+                                                            {{-- @if (Auth::user()->role_id == 1) --}}
                                                                 <a href="#" class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $item->id }}">
                                                                     <i class="bi bi-trash-fill"></i>
                                                                 </a>
-                                                            @endif
+                                                            {{-- @endif --}}
                                                         </div>
                                                         <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
                                                             <div class="modal-dialog">
@@ -125,7 +158,7 @@
                                                                     </div>
                                                                     <div class="modal-footer bg-dark">
                                                                         <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">No</button>
-                                                                        <form method="POST" action="{{ route('users.destroy', $item->id) }}">
+                                                                        <form method="POST" action="{{ route('event-registrations.destroy', $item->id) }}">
                                                                             @csrf
                                                                             @method('DELETE')
                                                                             <button type="submit" class="btn btn-danger btn-sm">Yes</button>
@@ -134,7 +167,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td> --}}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

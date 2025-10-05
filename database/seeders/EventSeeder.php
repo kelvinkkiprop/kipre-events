@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Models\Main\Event;
+use App\Models\Main\EventPackage;
 use App\Models\Main\EventCategory;
 
 class EventSeeder extends Seeder
@@ -21,7 +22,7 @@ class EventSeeder extends Seeder
         foreach ($eventCategories as $item) {
             // Default
             $items = [
-                ['id'=>Str::uuid(), 'category_id'=>$item->id, 'title'=>'ISC 2025', 'start_time'=>Carbon::parse('2026-10-27 08:00:00'), 'end_time'=>Carbon::parse('2026-10-31 17:00:00'), 'description'=>null, 'created_at'=>now()],
+                ['id'=>Str::uuid(), 'category_id'=>$item->id, 'title'=>'ISC 2025', 'start_time'=>Carbon::parse('2025-10-29 08:00:00'), 'end_time'=>Carbon::parse('2025-10-31 17:00:00'), 'description'=>null, 'created_at'=>now()],
             ];
         }
         Event::insert($items);

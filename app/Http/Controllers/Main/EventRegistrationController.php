@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Main\EventRegistration;
-use App\Models\Settings\Role;
-use App\Models\Others\UserStatus;
+use App\Models\Main\EventRegistrationStatus;
 
 class EventRegistrationController extends Controller
 {
@@ -29,7 +28,8 @@ class EventRegistrationController extends Controller
      */
     public function index()
     {
-        $items = EventRegistration::with(['user','event', 'package','attandanceMode'])->orderBy('created_at', 'desc')->paginate(10);
+        $items = EventRegistration::with(['user', 'user.position', 'user.title', 'user.country',
+         'event', 'package','attendanceMode','sessionToPresent','status'])->orderBy('created_at', 'desc')->paginate(10);
         // return $items;
         return view('registrations.index')->with([
             'items' =>  $items,
@@ -59,7 +59,7 @@ class EventRegistrationController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|string|email|unique:registrations,email',
-            'role_id' => 'required|integer',
+            'status_id' => 'required|integer',
             'phone' => 'required|string',
             'password' => 'required|string',
         ]);
@@ -70,7 +70,7 @@ class EventRegistrationController extends Controller
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'email' => $request['email'],
-            'role_id' => $request['role_id'],
+            'status_id' => $request['status_id'],
             'phone' => $request['phone'],
             'password' => Hash::make($random_password),
             'status_id' => 2,
@@ -98,7 +98,7 @@ class EventRegistrationController extends Controller
      */
     public function show(string $id)
     {
-        $item = EventRegistration::with(['role','status'])->find($id);
+        $item = EventRegistration::with(['user','status'])->find($id);
         return view('registrations.show')->with([
             'item' =>  $item,
         ]);
@@ -110,11 +110,10 @@ class EventRegistrationController extends Controller
     public function edit(string $id)
     {
         $item = EventRegistration::find($id);
-        $roles = Role::orderBy('name', 'asc')->get();
-        $statuses = UserStatus::orderBy('name', 'asc')->get();
+        $statuses = EventRegistrationStatus::orderBy('name','asc')->get();
+        // return $statuses;
         return view('registrations.edit')->with([
             'item' =>  $item,
-            'roles' => $roles,
             'statuses' => $statuses,
         ]);
     }
@@ -125,50 +124,14 @@ class EventRegistrationController extends Controller
     public function update(Request $request, string $id)
     {
         $this -> validate($request, [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => 'required|string|email|unique:registrations,email,'.$id,
-            'role_id' => 'required|integer',
-            'phone' => 'required|string',
-            'password' => 'required|string',
-            'reset_password' => 'nullable|string',
+            'status_id' => 'required|integer',
         ]);
 
-        // $random_password = Str::random(6);
-        $random_password = $request['password'];
         $item = EventRegistration::where('id', $id)->update([
-            'first_name' => $request['first_name'],
-            'last_name' => $request['last_name'],
-            'email' => $request['email'],
-            // 'password' => Hash::make($random_password),
-            'role_id' => $request['role_id'],
-            'phone' => $request['phone'],
             'status_id' => $request['status_id'],
             'updated_at'=>date('Y-m-d H:i:s'),
         ]);
-        // return $item;
-        // ResetPassword
-        if($request['reset_password']=='on'){
-            EventRegistration::where('id', $id)->update([
-                'password' => Hash::make($random_password),
-            ]);
-
-            // Message
-            $message = "<div>
-                <p>Your username/email is: {$request['email']}, and the default password is: {$random_password}</p>
-                <p>Click the button below to Login.</p>
-            </div>";
-            $data = array(
-                'name' => $request['first_name'],
-                'subject' => 'Updated Account',
-                'url' => config('app.url').'/login',
-                'btn-text' => 'Login',
-                'message' => $message,
-            );
-            Mail::to($request['email'])->send(new SendEmail($data));
-        }
-
-        return redirect()->route('registrations.index')->with('info', 'EventRegistration updated successfully');
+        return redirect()->route('event-registrations.index')->with('info', 'Payment status updated successfully');
     }
 
     /**
@@ -178,7 +141,7 @@ class EventRegistrationController extends Controller
     {
         $item = EventRegistration::find($id);
         $item->delete();
-        return redirect()->back()->with('danger', 'EventRegistration removed successfully');
+        return redirect()->back()->with('danger', 'Event registration removed successfully');
     }
 
     /**
