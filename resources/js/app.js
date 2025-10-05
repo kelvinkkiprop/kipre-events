@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', checkScroll);
 
   // Set_event_date
-  const eventDate = new Date("2025-10-25T09:00:00").getTime(); // adjust to your event
+  const eventDate = new Date("2025-10-29T00:00:00").getTime(); // adjust to your event
   const daysEl = document.getElementById("days");
   const hoursEl = document.getElementById("hours");
   const minutesEl = document.getElementById("minutes");
