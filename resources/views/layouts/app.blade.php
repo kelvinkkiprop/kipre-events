@@ -41,7 +41,7 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://primateresearch.org/events/international-biotechnology-and-biomedical-workshop-and-conference-2025" target="_blank">Event Details</a>
+                            <a class="nav-link" href="https://kipre.go.ke/conference.html" target="_blank">Event Details</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/event-booking">Event Booking</a>
@@ -98,7 +98,7 @@
 
             <!-------------------------------------------------messages------------------------------------------------->
             <div class="container my-5">
-                @include('inc.messages')
+                @include('inc.messages2')
             </div>
             <!-------------------------------------------------./messages------------------------------------------------->
 

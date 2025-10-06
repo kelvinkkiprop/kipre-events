@@ -150,7 +150,7 @@
                 <div class="tab-pane fade show1 active1" id="day1" role="tabpanel" aria-labelledby="day1-tab">
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-info1">
-                            <caption class="fw-bolder">Day 1 Schedule</caption>
+                            <caption class="fw-bolder" style="caption-side: top;">Day 1 Schedule</caption>
                             <thead class="table-primary">
                                 <th colspan="2">JOINT KIPRE SESSION <br> WEDNESDAY OCTOBER 29, 2025</th>
                             </thead>
@@ -266,7 +266,7 @@
                 <div class="tab-pane fade active1 show1" id="day2" role="tabpanel" aria-labelledby="day2-tab">
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-info1">
-                            <caption class="fw-bolder">Day 2 Schedule</caption>
+                            <caption class="fw-bolder" style="caption-side: top;">Day 2 Schedule</caption>
                             <thead class="table-primary">
                                 <th colspan="2">JOINT KIPRE SESSION <br> THURSDAY, OCTOBER 30, 2025</th>
                             </thead>
@@ -535,7 +535,7 @@
 
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-info1">
-                            <caption class="fw-bolder">Day 3 Schedule</caption>
+                            <caption class="fw-bolder" style="caption-side: top;">Day 3 Schedule</caption>
                             <thead class="table-primary">
                                 <th colspan="2">JOINT KIPRE SESSION <br> FRIDAY, OCTOBER 31, 2025</th>
                             </thead>

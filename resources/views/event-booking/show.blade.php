@@ -132,6 +132,7 @@
                     </span>
                 @enderror
             </div>
+            @if($package->id==2 || $package->id==3)
             <div class="mb-3 col-md-12">
                 <label for="student_id" class="col-form-label">Upload Student Confirmation Document e.g. Student ID, Letter from Learning Institution etc.:</label>
                 <input value="{{ $user->student_id }}" id="student_id" type="file" class="form-control @error('student_id') is-invalid @enderror" name="student_id">
@@ -141,6 +142,7 @@
                     </span>
                 @enderror
             </div>
+            @endif
             <div class="mb-3 col-md-12">
                 <label for="mode_of_attendance_id" class="col-form-label required">Mode of Attendance:</label>
                 @if ($modes->count() > 0)

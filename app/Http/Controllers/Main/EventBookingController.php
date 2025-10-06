@@ -111,7 +111,7 @@ class EventBookingController extends Controller
             // 'other_position' => 'nullable|string',
             'other_position' => 'required_if:position_id,9|string|nullable',
             'mode_of_attendance_id' => 'nullable|string',
-            'will_present' => 'required|in:Yes, Poster,Yes, Talk,No',
+            'will_present' => 'required|string',
             // 'session_to_present_id' => 'nullable|string',
             'session_to_present_id' => 'nullable|string|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
             // 'abstract' => 'nullable|file|mimes:pdf',

@@ -12,7 +12,7 @@
     <div class="row justify-content-center my-4">
 
         <div class="text-center">
-            <h6 class="h4 fw-bold">Thank you. Your registration has been submitted.</h6>
+            <h5 class="fw-bold">Thank you for submitting your online application. To complete your registration, kindly proceed with payment as outlined below:</h5>
         </div>
         <div class="row">
             <form method="POST" action="/checkout/{{ $item->id }}">
@@ -40,14 +40,42 @@
                 </div>
 
                 <div class="col-md-12">
-                    <h5 class="fw-bolder">Our Bank Details:</h5>
-                    <h6 class="fw-bold">The Kenya Institute of Primate Research (USD):</h6>
-                    <div>Bank: <strong>Standard Chartered Bank</strong></div>
-                    <div>BIC: <strong>SCBLKENXXXX</strong></div>
-                    <div>USD Account Number: <strong>8702 4890 56900</strong></div>
-                    <div>SWIFT: <strong>SCBLKENXXXX</strong></div>
-                    <div>Bank Code: <strong>02</strong></div>
-                    <div>Branch  Code: <strong>07500</strong></div>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0 p-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>1. Kenyan/East African applicants: </strong> Please use the <strong>Kenyan Shillings (Kshs.) account details</strong> provided.</h5>
+                                    <div class="card-text">
+                                        <b>Paybill:</b> 329329 <br>
+                                        <b>Account No:</b> 01024 8905 6900
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow-sm border-0 p-2">
+                                <div class="card-body">
+                                    <h5 class="card-title"><strong>2. International applicants:</strong> Please use the <strong>USD account details</strong> provided.</h5>
+                                    <div class="card-text">
+                                        <b>Account Name:</b> The Kenya Institute of Primate Research (USD): <br>
+                                        <b>Bank:</b> Standard Chartered Bank <br>
+                                        <b>BIC:</b> SCBLKENXXXX <br>
+                                        <b>USD Account Number:</b> 8702 4890 56900 <br>
+                                        <b>SWIFT:</b> SCBLKENXXXX <br>
+                                        <b>Bank Code:</b> 02 <br>
+                                        <b>Branch Code:</b> 07500
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 py-4">
+                    <ul style="list-style-type: square; padding-left: 20px; font-weight: bold; color: #333;">
+                        <li class="lead">Upon completing your payment, <span class="fw-bold">send proof of payment</span> to <a href="mailto:isc2025@primateresearch.org">isc2025@primateresearch.org</a> for verification.</li>
+                        <li class="lead">Applicants experiencing any challenges with the payment process are encouraged to <span class="fw-bold">reach out to the same email address</span> for further assistance.</li>
+                    </ul>
                 </div>
 
                 <div class="col-md-12 my-4">
