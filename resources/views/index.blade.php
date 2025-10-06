@@ -45,7 +45,7 @@
                     <a class="btn btn-warning btn-lg rounded-0" href="/event-booking"><small>APPLY NOW</small></a>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-warning btn-lg rounded-0" href="https://primateresearch.go.ke/events/international-biotechnology-and-biomedical-workshop-and-conference-2025/" target="_blank"><small>ABOUT CONFERECE</small></a>
+                    <a class="btn btn-warning btn-lg rounded-0" href="https://kipre.go.ke/conference.html" target="_blank"><small>ABOUT CONFERECE</small></a>
                 </div>
             </div>
 
