@@ -92,7 +92,7 @@
                                     @foreach ($recentEventRegistrations as $item)
                                         <tr>
                                             <td>@if($item->user){{ $item->user->name }}@endif</td>
-                                            <td>@if($item->user){{ $item->user->name }}@endif</td>
+                                            <td>@if($item->user){{ $item->user->email }}@endif</td>
                                             <td>{{ Carbon\Carbon::parse($item->created_at)->format('d M, y') }}</td>
                                         </tr>
                                     @endforeach
