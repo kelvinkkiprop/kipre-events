@@ -85,6 +85,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Package</th>
+                                        <th>Cost</th>
                                         <th>Created</th>
                                     </tr>
                                 </thead>
@@ -93,6 +94,7 @@
                                         <tr>
                                             <td>@if($item->user){{ $item->user->name }}@endif</td>
                                             <td>@if($item->package){{ $item->package->name }}@endif</td>
+                                            <td>@if($item->package){{ $item->package->currency_type }}. {{ $item->package->cost }}@endif</td>
                                             <td>{{ Carbon\Carbon::parse($item->created_at)->format('d M, y') }}</td>
                                         </tr>
                                     @endforeach
