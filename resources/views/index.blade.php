@@ -93,7 +93,7 @@
             <ul class="nav nav-tabs border-0 justify-content-center mb-4" id="dayTabs" role="tablist">
                 <li class="nav-item px-2" role="presentation">
                     <div class="card border-primary rounded-0 nav-link p-0 active1" id="day1-tab" data-bs-toggle="tab" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">
-                        <div class="card-header bg-primary text-white text-center">
+                        <div class="card-header rounded-0 bg-primary text-white text-center">
                             Day 01
                         </div>
                         <div class="card-body py-1 px-4">
