@@ -9,6 +9,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Main\EventRegistration;
 use App\Models\Main\EventRegistrationStatus;
+// Import
+use App\Exports\ExportEventRegistration;
+use Excel;
 
 class EventRegistrationController extends Controller
 {
@@ -175,6 +178,15 @@ class EventRegistrationController extends Controller
         return view('registrations.index')->with([
             'items' =>  $items,
         ]);
+   }
+
+
+   /**
+    * exportItems
+    */
+    public function exportItems(Request $request){
+       $name = config('app.name').' registrations '.date('Y-m-d H:i:s').'.xlsx';
+       return Excel::download(new ExportEventRegistration, $name);
    }
 
 }

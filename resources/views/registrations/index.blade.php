@@ -31,8 +31,8 @@
                                         <i class="bi bi-three-dots-vertical"></i> Export
                                     </span>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item"><i class="bi bi-book"></i> PDF</a></li>
-                                        <li><a class="dropdown-item"><i class="bi bi-list"></i> Excel</a></li>
+                                        {{-- <li><a class="dropdown-item"><i class="bi bi-book"></i> PDF</a></li> --}}
+                                        <li><a href="/export-event-registrations" class="dropdown-item"><i class="bi bi-list"></i> Excel</a></li>
                                     </ul>
                                 </div>
                             </div>

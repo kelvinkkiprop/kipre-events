@@ -916,3 +916,83 @@ $ sudo certbot certificates
 2. Will list certbot installed
 $ sudo certbot delete
 ===============================================./CERTBOT===============================================
+
+
+
+#####################################################################################################
+N. LAREVEL EXCEL
+1. Installation
+composer require maatwebsite/excel --ignore-platform-reqs
+
+2. To publish the config
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+
+I. Import
+3. Make an import Model
+php artisan make:import ImportUser --model=User
+php artisan make:import ImportEventRegistration --model=EventRegistration
+
+4. Update ImportUser Model
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Concerns\ToModel;
+
+class ImportUser implements ToModel
+{
+    /**
+     * @param array $row
+     *
+     * @return User|null
+     */
+    public function model(array $row)
+    {
+        return new User([
+           'name'     => $row[0],
+           'email'    => $row[1],
+           'password' => Hash::make($row[2]),
+        ]);
+    }
+}
+
+5. In controller, call this import now:
+
+use App\Imports\ImportUser;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
+class UsersController extends Controller
+{
+    public function import()
+    {
+        Excel::import(new ImportUser, 'users.xlsx');
+        return redirect('/')->with('success', 'All good!');
+    }
+}
+
+ii. Export
+6. Make an Export Model
+php artisan make:export ExportUser --model=User
+php artisan make:export ExportVenue --model=Venue
+php artisan make:export ExportMeeting --model=Meeting
+php artisan make:export ExportEventRegistration --model=EventRegistration
+
+7. Update Export Model
+namespace App\Exports;
+use App\Models\User;
+use Maatwebsite\Excel\Concerns\FromCollection;
+class ExportUser implements FromCollection
+{
+    public function collection()
+    {
+        return User::select('name','email')->get();
+    }
+}
+8. In controller:
+use App\Exports\ExportUser;
+ public function exportUsers(Request $request){
+    return Excel::download(new ExportUser, 'users.xlsx');
+}
+
+9. Reference
+- https://techvblogs.com/blog/laravel-9-import-export-excel-csv-file
+#####################################################################################################

@@ -96,3 +96,4 @@ Route::post('search-users', [UserController::class, 'searchItems']);
 */
 Route::resource('event-registrations', EventRegistrationController::class);
 Route::post('search-event-registrations', [EventRegistrationController::class, 'searchItems']);
+Route::get('export-event-registrations', [EventRegistrationController::class, 'exportItems'])->name('export-users');
