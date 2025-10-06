@@ -84,7 +84,7 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Country</th>
+                                        <th>Package</th>
                                         <th>Created</th>
                                     </tr>
                                 </thead>
@@ -92,7 +92,7 @@
                                     @foreach ($recentEventRegistrations as $item)
                                         <tr>
                                             <td>@if($item->user){{ $item->user->name }}@endif</td>
-                                            <td>@if($item->user){{ $item->user->email }}@endif</td>
+                                            <td>@if($item->package){{ $item->package->name }}@endif</td>
                                             <td>{{ Carbon\Carbon::parse($item->created_at)->format('d M, y') }}</td>
                                         </tr>
                                     @endforeach

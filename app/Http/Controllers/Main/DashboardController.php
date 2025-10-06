@@ -33,7 +33,7 @@ class DashboardController extends Controller
         $totalEvents = Event::count();
         $totalEventRegistrations = EventRegistration::count();
         $totalPayments = EventRegistration::where('status_id', 2)->sum('status_id');
-        $recentEventRegistrations = EventRegistration::with(['user'])->orderBy('id', 'desc')->get()->take(5);
+        $recentEventRegistrations = EventRegistration::with(['package','event'])->orderBy('id', 'desc')->get()->take(5);
 
         return view('dashboard.index')->with([
             'totalUsers' => $totalUsers,
