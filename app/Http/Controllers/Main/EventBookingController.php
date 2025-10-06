@@ -100,7 +100,7 @@ class EventBookingController extends Controller
             'first_name' => 'required|string',
             'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
+            'email' => 'required|string|email',
             'phone' => 'required|string',
             'institution' => 'required|string',
             'physical_address' => 'nullable|string',
