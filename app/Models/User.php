@@ -132,7 +132,7 @@ class User extends Authenticatable
      * title
      */
     public function title(){
-        return $this->hasOne(Title::class, 'id', 'position_id');
+        return $this->hasOne(Title::class, 'id', 'title_id');
     }
 
     /**

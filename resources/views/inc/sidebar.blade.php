@@ -26,13 +26,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/users" class="{{ Request::path() == 'users' ? 'nav-link active' : 'nav-link' }}">
+                            <a href="/users" class="{{ Request::path()=='users' ? 'nav-link active' : 'nav-link' }}">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Users list</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/users/create" class="{{ Request::path() == 'users' ? 'nav-link active' : 'nav-link' }}">
+                            <a href="/users/create" class="{{ Request::path()=='users/create' ? 'nav-link active' : 'nav-link' }}">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Create user</p>
                             </a>

@@ -15,10 +15,10 @@
             <div class="mb-3 col-md-12">
                 <label for="title_id" class="col-form-label required">Select title:</label>
                  @if ($titles->count() > 0)
-                    @foreach ($titles as $item)
+                    @foreach ($titles as $title)
                         <div class="form-check">
-                            <input class="form-check-input @error('title_id') is-invalid @enderror" type="radio" name="title_id" id="title_id_no" value="{{ $item->id }}">
-                            <label class="form-check-label" for="title_id_no">{{ $item->name }}</label>
+                            <input class="form-check-input @error('title_id') is-invalid @enderror" type="radio" name="title_id" id="title_id" value="{{ $title->id }}">
+                            <label class="form-check-label" for="title_id">{{ $title->name }}</label>
                         </div>
                         @error('title_id')
                             <div class="invalid-feedback d-block">
