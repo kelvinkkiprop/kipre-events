@@ -73,7 +73,7 @@
 
                 <div class="col-md-12 py-4">
                     <ul style="list-style-type: square; padding-left: 20px; font-weight: bold; color: #333;">
-                        <li class="lead">Upon completing your payment, <span class="fw-bold">send proof of payment</span> to <a href="mailto:isc2025@primateresearch.org">isc2025@primateresearch.org</a> for verification.</li>
+                        <li class="lead">Upon completing your payment, <span class="fw-bold">send proof of payment</span> to <a href="mailto:accounts@kipre.go.ke">accounts@kipre.go.ke</a> for verification.</li>
                         <li class="lead">Applicants experiencing any challenges with the payment process are encouraged to <span class="fw-bold">reach out to the same email address</span> for further assistance.</li>
                     </ul>
                 </div>
