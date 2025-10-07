@@ -93,7 +93,7 @@
                                 <tbody>
                                     @foreach ($recentEventRegistrations as $item)
                                         <tr>
-                                            <td>{{ ($recentEventRegistrations->currentpage()-1) * $recentEventRegistrations->perpage()+$loop->index+1 }}.</td>
+                                            <td>{{ $loop->index + 1 }}</td>
                                             <td>@if($item->user){{ $item->user->name }}@endif</td>
                                             <td>@if($item->package){{ $item->package->name }}@endif</td>
                                             <td>@if($item->package){{ $item->package->currency_type }}. {{ $item->package->cost }}@endif</td>
