@@ -41,6 +41,7 @@ class ExportEventRegistration implements FromCollection, WithHeadings, WithMappi
             optional($registration->user)->email ?? 'N/A', // Email
             optional($registration->user)->phone ?? 'N/A', // Phone
             optional($registration->attendanceMode)->name ?? 'N/A', // Mode of Attendance
+            optional($registration->guestType)->name ?? 'N/A', // Type of Guest
             $registration->will_present ? 'Yes' : 'No', // Would you like to make a presentation?
             optional($registration->sessionToPresent)->title ?? 'N/A', // Which session would you like to present?
             $registration->abstract_url ?? 'N/A', // Upload an abstract
@@ -67,6 +68,7 @@ class ExportEventRegistration implements FromCollection, WithHeadings, WithMappi
             'Email',
             'Phone',
             'Mode of Attendance',
+            'Type of Guest',
             'Would you like to make a presentation at the Conference?',
             'Which session would you like to present?',
             'Upload an abstract (250 words, Times New Roman 12, continuous prose)',

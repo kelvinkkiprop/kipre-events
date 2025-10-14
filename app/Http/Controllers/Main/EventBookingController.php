@@ -15,6 +15,7 @@ use App\Models\Others\Country;
 use App\Models\Others\Title;
 use App\Models\Others\Position;
 use App\Models\Others\ModeOfAttandance;
+use App\Models\Others\GuestType;
 
 
 class EventBookingController extends Controller
@@ -66,6 +67,7 @@ class EventBookingController extends Controller
         $positions = Position::orderBy('id', 'asc')->get();
         $sessions = EventSession::orderBy('name', 'asc')->get();
         $modes = ModeOfAttandance::orderBy('name', 'asc')->get();
+        $guestTypes = GuestType::orderBy('name', 'asc')->get();
 
         return view('event-booking.show')->with([
             'user'      =>  $user,
@@ -75,6 +77,7 @@ class EventBookingController extends Controller
             'positions'   =>  $positions,
             'sessions'   =>  $sessions,
             'modes'   =>  $modes,
+            'guestTypes'   =>  $guestTypes,
         ]);
     }
 
@@ -110,7 +113,8 @@ class EventBookingController extends Controller
             'student_id' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
             // 'other_position' => 'nullable|string',
             'other_position' => 'required_if:position_id,9|string|nullable',
-            'mode_of_attendance_id' => 'nullable|string',
+            // 'mode_of_attendance_id' => 'nullable|string',
+            'guest_type_id' => 'required|integer',
             'will_present' => 'required|string',
             // 'session_to_present_id' => 'nullable|string',
             'session_to_present_id' => 'nullable|string|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
@@ -152,14 +156,19 @@ class EventBookingController extends Controller
             'package_id' => $id,
             'student_id' => $mStudentID,
             'other_position' => $request['other_position'],
-            'mode_of_attendance_id' => $request['mode_of_attendance_id'],
+            // 'mode_of_attendance_id' => $request['mode_of_attendance_id'],
+            'guest_type_id' => $request['guest_type_id'],
             'will_present' => $request['will_present'],
             'session_to_present_id' => $request['session_to_present_id'],
             'abstract' => $mAbstract,
             'invoice_number' => time(),
         ]);
 
-        // $newId = $item2->id;
+        $guestTypeId = $request['guest_type_id'];
+        if($guestTypeId==1 || $guestTypeId==2){ //guest speaker and invited guests are not supposed to pay
+            return redirect('/')->with('success', 'Details saved successfully');
+        }
+
         // return $newId;
         return redirect('/checkout/'.$item2->id)->with('success', 'Details saved successfully');
         // return redirect()->route('events.edit', $item2->id)->with('success', 'Details saved successfully');

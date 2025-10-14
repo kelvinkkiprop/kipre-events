@@ -34,6 +34,7 @@ php artisan make:seeder GenderSeeder
 php artisan make:seeder GenderSeeder
 php artisan make:seeder AgeBracketSeeder
 php artisan make:seeder DisabilitySeeder
+php artisan make:seeder GuestTypeSeeder
 
 4. Controllers
 php artisan make:controller Main/DashboardController
@@ -64,6 +65,7 @@ php artisan make:model Others/UserStatus -m
 php artisan make:model Others/Title -m
 php artisan make:model Others/Country -m
 php artisan make:model Others/ModeOfAttandance -m
+php artisan make:model Others/GuestType -m
 
 
 6. Middleware

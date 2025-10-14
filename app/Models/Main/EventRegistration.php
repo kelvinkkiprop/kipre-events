@@ -12,6 +12,7 @@ use App\Models\Main\EventRegistrationStatus;
 use App\Models\Main\EventSession;
 use App\Models\Other\PaymentMethod;
 use App\Models\Others\ModeOfAttandance;
+use App\Models\Others\GuestType;
 
 class EventRegistration extends Model
 {
@@ -50,6 +51,7 @@ class EventRegistration extends Model
         'student_id',
         'other_position',
         'mode_of_attendance_id',
+        'guest_type_id',
         'will_present',
         'session_to_present_id',
         'abstract',
@@ -128,6 +130,13 @@ class EventRegistration extends Model
      */
     public function attendanceMode(){
         return $this->hasOne(ModeOfAttandance::class, 'id', 'mode_of_attendance_id');
+    }
+
+    /**
+     * guestType
+     */
+    public function guestType(){
+        return $this->hasOne(GuestType::class, 'id', 'guest_type_id');
     }
 
     /**

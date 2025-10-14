@@ -92,7 +92,7 @@
                 @enderror
             </div>
             <div class="mb-3 col-md-12">
-                <label for="country_id" class="col-form-label required">Country (Where your country_id is located):</label>
+                <label for="country_id" class="col-form-label required">Country (Where your country is located):</label>
                 <select value="{{ $user->country_id }}" id="country_id" type="text" class="form-control @error('country_id') is-invalid @enderror" name="country_id" required>
                     <option value="0" disabled="true" selected="true">--- Select Country ---</option>
                     @if ($countries->count() > 0)
@@ -143,7 +143,7 @@
                 @enderror
             </div>
             @endif
-            <div class="mb-3 col-md-12">
+            {{-- <div class="mb-3 col-md-12">
                 <label for="mode_of_attendance_id" class="col-form-label required">Mode of Attendance:</label>
                 @if ($modes->count() > 0)
                     @foreach ($modes as $item)
@@ -152,6 +152,22 @@
                             <label class="form-check-label" for="mode_of_attendance_id">{{ $item->name }}</label>
                         </div>
                         @error('mode_of_attendance_id')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    @endforeach
+                @endif
+            </div> --}}
+            <div class="mb-3 col-md-12">
+                <label for="guest_type_id" class="col-form-label required">Type of Guest:</label>
+                @if ($modes->count() > 0)
+                    @foreach ($guestTypes as $item)
+                        <div class="form-check">
+                            <input class="form-check-input @error('guest_type_id') is-invalid @enderror" type="radio" name="guest_type_id" id="guest_type_id" value="{{ $item->id }}">
+                            <label class="form-check-label" for="guest_type_id">{{ $item->name }}</label>
+                        </div>
+                        @error('guest_type_id')
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>

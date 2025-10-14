@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('student_id')->nullable();
             $table->string('other_position')->nullable();
             $table->string('mode_of_attendance_id')->nullable();
+            $table->integer('guest_type_id')->nullable();
             $table->string('will_present')->nullable();
             $table->string('session_to_present_id')->nullable();
             $table->string('abstract')->nullable();

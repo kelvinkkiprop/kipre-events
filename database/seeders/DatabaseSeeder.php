@@ -21,18 +21,19 @@ class DatabaseSeeder extends Seeder
         // ]);
 
          $this->call([
-            UserSeeder::class,
-            RoleSeeder::class,
-            UserStatusSeeder::class,
-            EventCategorySeeder::class,
-            EventSeeder::class,
-            EventPackageSeeder::class,
-            CountrySeeder::class,
-            TitleSeeder::class,
-            PositionSeeder::class,
-            ModeOfAttandanceSeeder::class,
-            EventSessionSeeder::class,
-            EventRegistrationStatusSeeder::class,
+            // UserSeeder::class,
+            // RoleSeeder::class,
+            // UserStatusSeeder::class,
+            // EventCategorySeeder::class,
+            // EventSeeder::class,
+            // EventPackageSeeder::class,
+            // CountrySeeder::class,
+            // TitleSeeder::class,
+            // PositionSeeder::class,
+            // ModeOfAttandanceSeeder::class,
+            // EventSessionSeeder::class,
+            // EventRegistrationStatusSeeder::class,
+            GuestTypeSeeder::class,
         ]);
 
 
