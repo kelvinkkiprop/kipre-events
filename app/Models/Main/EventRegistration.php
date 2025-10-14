@@ -73,7 +73,7 @@ class EventRegistration extends Model
         if(is_null($value)){
             return null;
         }else{
-            $path = config('app.asset_url').config('app.paths.file_download');
+            $path = config('app.url').config('app.paths.file_download');
             return $path.$value;
         }
     }
@@ -83,7 +83,7 @@ class EventRegistration extends Model
         if(is_null($value)){
             return null;
         }else{
-            $path = config('app.asset_url').config('app.paths.file_download');
+            $path = config('app.url').config('app.paths.file_download');
             return $path.$value;
         }
     }
