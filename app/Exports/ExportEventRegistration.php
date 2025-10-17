@@ -29,7 +29,7 @@ class ExportEventRegistration implements FromCollection, WithHeadings, WithMappi
     public function map($registration): array
     {
         return [
-            optional($registration->user)->title ?? 'N/A', // Title
+            optional(optional($registration->user)->title)->name ?? 'N/A', // Title
             optional($registration->user)->name ?? 'N/A', // Name
             optional($registration->user)->institution ?? 'N/A', // Institution
             optional($registration->package)->name ?? 'N/A', // Package
