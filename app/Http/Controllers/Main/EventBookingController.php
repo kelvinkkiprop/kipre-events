@@ -116,10 +116,10 @@ class EventBookingController extends Controller
             // 'mode_of_attendance_id' => 'nullable|string',
             'guest_type_id' => 'required|integer',
             'will_present' => 'required|string',
-            // 'session_to_present_id' => 'nullable|string',
-            'session_to_present_id' => 'nullable|string|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
-            // 'abstract' => 'nullable|file|mimes:pdf',
-            'abstract' => 'nullable|file|mimes:pdf|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
+            // // 'session_to_present_id' => 'nullable|string',
+            // 'session_to_present_id' => 'nullable|string|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
+            // // 'abstract' => 'nullable|file|mimes:pdf',
+            // 'abstract' => 'nullable|file|mimes:pdf|required_if:will_present,Yes, Poster|required_if:will_present,Yes, Talk',
         ]);
 
         $mCurrentUser = Auth::user();
@@ -143,12 +143,12 @@ class EventBookingController extends Controller
             $request->student_id->storeAs($path_uploads, $mStudentID, 'public');
 
         }
-        $mAbstract=null;
-        if($request->hasFile('abstract')!=null){
-            $mAbstract = time().uniqid().'.'.$request->abstract->extension();
-            $request->abstract->storeAs($path_uploads, $mAbstract, 'public');
+        // $mAbstract=null;
+        // if($request->hasFile('abstract')!=null){
+        //     $mAbstract = time().uniqid().'.'.$request->abstract->extension();
+        //     $request->abstract->storeAs($path_uploads, $mAbstract, 'public');
 
-        }
+        // }
 
         $item2=EventRegistration::create([
             'user_id' => $mCurrentUser->id,
@@ -159,8 +159,8 @@ class EventBookingController extends Controller
             // 'mode_of_attendance_id' => $request['mode_of_attendance_id'],
             'guest_type_id' => $request['guest_type_id'],
             'will_present' => $request['will_present'],
-            'session_to_present_id' => $request['session_to_present_id'],
-            'abstract' => $mAbstract,
+            // 'session_to_present_id' => $request['session_to_present_id'],
+            // 'abstract' => $mAbstract,
             'invoice_number' => time(),
         ]);
 

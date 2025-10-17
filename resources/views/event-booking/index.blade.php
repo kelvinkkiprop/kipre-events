@@ -32,9 +32,9 @@
                             <div class="p-3 border-bottom-dotted fw-bold">
                                 * Early Registration (Ending 31st July, 2025)
                             </div>
-                            <div class="p-3 border-bottom-dotted">
+                            {{-- <div class="p-3 border-bottom-dotted">
                                 ** Late registration fee is Sh. 13,000. Starting from 1st August until the events starts
-                            </div>
+                            </div> --}}
                             <div class="p-3">
                                 On-Site registration will be available at Sh. 16,000
                             </div>
@@ -63,9 +63,9 @@
                             <div class="p-3 border-bottom-dotted fw-bold">
                                 * Early registration price (Ending 31st July, 2025)
                             </div>
-                            <div class="p-3 border-bottom-dotted">
+                            {{-- <div class="p-3 border-bottom-dotted">
                                 ** Late registration fee is Sh. 6,000. Starting from 1st August until the events starts.
-                            </div>
+                            </div> --}}
                             <div class="p-3">
                                 On-Site registration will be available at Sh. 9,000
                             </div>
@@ -94,9 +94,9 @@
                             <div class="p-3 border-bottom-dotted fw-bold">
                                 * Early registration price (Ending 31st July, 2025)
                             </div>
-                            <div class="p-3 border-bottom-dotted">
-                                Late registration fee is $150. Starting from 1st August until the events starts.
-                            </div>
+                            {{-- <div class="p-3 border-bottom-dotted">
+                                ** Late registration fee is $150. Starting from 1st August until the events starts.
+                            </div> --}}
                             <div class="p-3">
                                On-Site registration will be available at $200
                             </div>
@@ -125,9 +125,9 @@
                             <div class="p-3 border-bottom-dotted fw-bold">
                                 * Early registration price (Ending 31st July, 2025)
                             </div>
-                            <div class="p-3 border-bottom-dotted">
+                            {{-- <div class="p-3 border-bottom-dotted">
                                 ** Late registration fee is $300. Starting from 1st August until the events starts.
-                            </div>
+                            </div> --}}
                             <div class="p-3">
                                On-Site registration will be available at $300
                             </div>

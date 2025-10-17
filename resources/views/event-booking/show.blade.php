@@ -195,7 +195,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="row" id="presentation_details">
+            {{-- <div class="row" id="presentation_details">
                 <div class="mb-3 col-md-12">
                     <label for="session_to_present_id" class="col-form-label required">Which session would you like to present?:</label>
                     <select value="{{ $user->session_to_present_id }}" id="session_to_present_id" type="text" class="form-control @error('session_to_present_id') is-invalid @enderror" name="session_to_present_id">
@@ -221,7 +221,7 @@
                         </span>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">@method('PUT') Submit Now</button>
             </div>
